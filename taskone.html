@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>任务列表</title>
+<link type="text/css" href="style.css" rel="stylesheet">
+<script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script> 
+<script type="text/javascript" src="js/personaltask.js"></script>
+</head>
+
+<body>
+<div class="topnav">
+  <ul>
+    Name
+  </ul>
+</div>
+<div class="leftnav">
+  <ul>
+      <li><a href="publish.html">发布任务</a></li>
+    <li><a href="list.html">任务列表</a></li>
+    <li class="active"><a href="examine.html">任务审核</a></li>
+  </ul>
+</div>
+<div class="rightbody" id="bodylist">
+  <div class="box">
+  <ul class="pushbtn"><a href="publish.html">+发布任务</a></ul>
+  <ul>
+  <table width="100%" border="0" cellspacing="1" cellpadding="0" class="listtable" id="listtable">
+  <tr>
+    <td class="t1">任务名称</td>
+    <td class="t1">任务状态</td>
+    <td class="t1">剩余任务总数</td>
+    <td class="t1">已完成</td>
+    <td class="t1">已审核</td>
+    <td class="t1">未审核</td>
+  </tr>
+</table>
+  </ul>
+  </div>
+</div>
+</body>
+</html>

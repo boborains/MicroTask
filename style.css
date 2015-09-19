@@ -1,0 +1,277 @@
+@charset "UTF-8";
+/* CSS Document */
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
+	font-size: 14px;
+}
+body {
+	background: #eee;
+}
+body, div, ul, li, img{
+	list-style: none;
+	margin:0px;
+	padding:0px;
+	border:0px;
+	vertical-align:top;
+}
+.topnav {
+	min-height: 50px;
+	background: #000;
+	color: #fff;
+	line-height: 50px;
+	font-size: 18px;
+	display: block;
+	position: fixed;
+	width: 100%;
+	top:0px;
+}
+.topnav ul {
+ padding: 0px 25px font-weight:bold;
+}
+.leftnav {
+	width: 16%;
+	background: #fff;
+	position: fixed;
+	top: 50px;
+	bottom: 0px;
+	left: 0px;
+	display: block;
+	color: #000;
+	box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.05);
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.leftnav ul {
+	display: block;
+	overflow-y: auto;
+	margin-top: 35px;
+	border-top: 1px solid #eee
+}
+.leftnav li {
+	line-height: 40px;
+	font-size: 16px;
+}
+.leftnav li a {
+	padding-left: 25px;
+	text-decoration: none;
+	color: #f18d00;
+	position: relative;
+	display: block;
+}
+.leftnav li a:hover {
+	background: #eee
+}
+.leftnav li.active {
+	background: #f18d00;
+	color: #fff;
+}
+.leftnav li.active a {
+	background: #f18d00;
+	color: #fff;
+}
+.rightbody {
+	width: 84%;
+	background: #eee;
+	position: fixed;
+	top: 50px;
+	bottom: 0px;
+	left: 16%;
+	display: block;
+	color: #000;
+	box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.05);
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.rightbody .box {
+	background: #fff;
+	margin: 25px;
+	padding: 25px;
+	width: auto;
+	box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.05);
+	border-radius: 4px;
+	display: block;
+	overflow-y: auto;
+}
+.rightbody .box ul {
+
+	display: block;
+	overflow-y: auto;
+	margin-bottom:10px;
+}
+.rightbody .box li {
+	float: left;
+	line-height: 34px;
+}
+.rightbody .box .li_left {
+	width: 15%;
+	float: left;
+	text-align: right;
+	padding-right: 20px;
+}
+.rightbody .box .li_right {
+	width: 80%;
+	float: left;
+	display:block;
+	padding:0px;
+	margin:0px;
+}
+.rightbody .box .li_right .savebtn {
+	background:#f68b1f;
+	font-size:30px;
+	text-decoration:none;
+	color:#fff;
+	padding:20px 60px;
+	cursor:pointer;
+	border:0px;
+	
+}
+.rightbody input, select {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	line-height: 30px;
+	
+}
+.rightbody input:focus {
+	border-color: #f18d00;
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(241,141,0,.6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(241,141,0,.6)
+}
+.rightbody .box .inputw500 {
+	width: 500px;line-height:40px;
+	height:40px;
+}
+.rightbody .box .inputw200 {
+	width: 200px;
+	line-height:40px;
+	height:40px;
+	margin-right:10px;
+}
+.rightbody .box .list {
+	border: 1px solid #eee;
+	min-height: 360px;
+	border-radius: 4px;
+	padding:0px;
+	margin:0px;
+	width:100%;
+}
+
+.rightbody .box .rightanswerbar {
+	width: 120px;
+	overflow-x: hidden;
+	position:relative;
+}
+.rightbody .box .rightanswerbar ul {
+	clear: both;
+	width: 100%;
+	display: block;
+	overflow-y: auto;
+	padding: 0px;
+	margin: 0px;
+}
+.rightbody .box .rightanswerbar li {
+	width: 95%;
+	padding: 0px;
+	margin: 5px 0px;
+	line-height: 40px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	text-align: center;
+	background:#fff;
+	cursor:pointer;
+	
+}
+
+/*问题列表*/
+.qcss {
+	width: auto;
+	background: #eee;
+	border-radius: 4px;
+	display: block;
+	margin: 20px;
+	padding: 0px 10px;
+}
+.qcss .atcss {
+	padding: 0px;
+	margin: 0px;
+	display: block;
+	min-height: 33px;
+	width:100%;
+}
+.qcss .atcss .left {
+	width: 75%;
+	float: left;
+	text-align: left;
+}
+.qcss .atcss .right {
+	text-align: right;
+	width: 25%;
+	float: left;
+	
+}
+.qcss .atline {
+	border-bottom: 1px solid #ccc;
+	padding: 0px;
+	margin: 0px;
+	display: block;
+	font-size: 14px;
+	width:100%;
+}
+.qcss .atline ul{clear:none; margin:0px; padding:0}
+.qcss .atline .left {
+	width: 75%;
+	float: left;
+}
+.qcss .atline .right {
+	text-align:right;
+	width: 25%;
+	float: left;
+}
+.qcss .input{ height:20px;
+	border:1px solid #eee; background:#eee;
+	-webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,0);
+	box-shadow: inset 0 0px 0px rgba(0,0,0,0);
+	-webkit-transition: border-color ease-in-out 0s, -webkit-box-shadow ease-in-out 0s;
+	-o-transition: border-color ease-in-out 0s, box-shadow ease-in-out 0s;
+	transition: border-color ease-in-out 0s, box-shadow ease-in-out 0s;}
+.qcss .input1 {
+	border: 0px;
+	background: #eee;
+	font-size: 14px;
+}
+.qcss .input2 {
+	border: 1px solid #999;
+	font-size: 14px;
+	background: #FFC;
+}
+.qcss .input3 {
+	background: #FFC;
+	font-size: 14px;
+	border: 0px;
+}
+.qcss img {
+	cursor: pointer;
+	padding:0px;
+	margin:0px;
+	border:0px;
+}
+/*任务列表*/
+.rightbody .box .listtable{ background:#eee;}
+.rightbody .box .listtable .t1{background:#eee; height:40px; font-size:16px;padding-left:10px;color:#666}
+.rightbody .box .listtable .t2{ background:#fff;padding-left:10px;color:#666; padding:5px}
+.rightbody .box .ztitle{border-bottom:1px solid #999; padding-bottom:5px;font-size:18px; color:#666}
+.rightbody .listtitle {padding:5px 50px; min-height:40px; color:#666}
+.rightbody .listtitle  li{float:left; font-size:32px;line-height:55px;}
+.rightbody .listtitle .name{width:80%}
+.rightbody .listtitle .pushbtn{width:20%;display:block; overflow:auto; line-height:40px; text-align:right}
+.rightbody .listtitle .pushbtn a{ background:#f68b1f; color:#fff; text-decoration:none; border-radius:4px;padding:8px 20px;}
+/*审核页*/
+
+.lititle{background:#f5ad65;color:#fff}
+.datatd{padding:0px 5px; height:35px; color:#333;text-align:center}
+.examinebtn{ border:0px; background:#09F; font-size:14px; padding:3px 10px; margin:5px 0px; cursor:pointer}
+.datatr1{background:#eee; cursor:pointer}
+.datatr2{background:#ccc; cursor:pointer}
