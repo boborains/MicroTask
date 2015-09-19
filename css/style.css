@@ -268,6 +268,7 @@ body, div, ul, li, img{
 .rightbody .box .listtable .t1{background:#eee; height:40px; font-size:16px;padding-left:10px;color:#666}
 /*.rightbody .box .listtable .t2{ bf8f8f8ackground:#fff;padding-left:10px;color:#666; padding:5px}*/
 .rightbody .box .ztitle{border-bottom:1px solid #999; padding-bottom:5px;font-size:18px; color:#666}
+.rightbody .box .questiontitle{padding-left:50px;}
 .rightbody .listtitle {padding:5px 50px; min-height:40px; color:#666}
 .rightbody .listtitle  li{float:left; font-size:32px;line-height:55px;}
 .rightbody .listtitle .name{width:80%}
@@ -281,7 +282,13 @@ body, div, ul, li, img{
 .examinebtn{ border:0px; background:#09F; font-size:14px; padding:3px 10px; margin:5px 0px; cursor:pointer}
 .datatr1{background:#fff; cursor:pointer;height:30px;}
 .datatr2{background:#eee; cursor:pointer}
-
+#savebtn{background:#f68b1f;
+  	font-size:30px;
+  	text-decoration:none;
+  	color:#fff;
+  	padding:20px 60px;
+  	cursor:pointer;
+  	border:0px;}
 /*分页样式margin-right:8px;padding:5px 15px;cursor:pointer;border-radius:4px;background:#f18d00;color:#fff;border:1px solid #f18d00;width:50px;*/
 
 .page{margin:20px 0px 5px 0px; line-height:30px;}

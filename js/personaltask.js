@@ -33,6 +33,7 @@
 			    var objul=document.createElement("tr");
 				objul.id=i;
 				objul.className='datatr1'
+				pindarr[i]=data.data.result[i].pind
 				objul.onmouseover=function(){
                     this.className="tractive"
                 }
@@ -43,7 +44,7 @@
                     this.className="trhover"
                 }
                 objul.onclick=function(){
-                    showtask(this.id,pageNo,pageSize)
+                   persononetask(pindarr[this.id],pageNo,pageSize)
                 }
 				pindarr[i]=data.data.result[i].pind
 				var checkStatus
@@ -121,4 +122,67 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
     document.getElementById("downbtn").onmouseout=function(){
         this.className="pagemouseout"
     }
+ }
+ function persononetask(id,pageNo,pageSize){
+    document.getElementById("list").style.display="none"
+    $.ajax({
+       url:"http://m.antzb.com/web/personaltask/detail.do?id="+id,
+       success:function(data){
+           var data2 = eval('(' + data + ')');
+          // alert(data2.code)
+           var taskobj=document.createElement("div")
+           taskobj.className="box"
+           document.getElementById("rightbody").appendChild(taskobj)
+           var taskdesc=document.createElement("div")
+           taskdesc.id="taskdesc"
+           taskobj.appendChild(taskdesc)
+           var targetpagetitle=document.createElement("div")
+    	   targetpagetitle.innerHTML="<ul class='ztitle'>任务详情</ul><ul>任务名称："+data2.data.taskTemplateDetail.taskTitle+data2.data.personalTaskDetail.pind+"</ul><ul>任务描述："+data2.data.taskTemplateDetail.taskDesc+"</ul><ul><span>已做任务："+data2.data.taskTemplateDetail.hasDoneCount+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>任务总数："+data2.data.taskTemplateDetail.taskCount+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>任务价格："+data2.data.taskTemplateDetail.taskFee+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>价格类型："+data2.data.taskTemplateDetail.priceType+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>任务状态描述："+data2.data.taskTemplateDetail.taskStatusDesc+"</span></ul><ul>任务内容：</ul>"
+    	   taskdesc.appendChild(targetpagetitle)
+    	   var personalanswer=new Array();
+    	   //alert("共"+data2.data.taskTemplateDetail.taskTemplate.content.length+"题")
+    	   for(j=0;j<data2.data.taskTemplateDetail.taskTemplate.content.length;j++){
+              var tasknr=document.createElement("ul")
+              tasknr.innerHTML="Q"+data2.data.taskTemplateDetail.taskTemplate.content[j].index+"："+data2.data.taskTemplateDetail.taskTemplate.content[j].question
+              personalanswer[j]=data2.data.personalTaskDetail.taskContent[j+1]
+
+              taskdesc.appendChild(tasknr)
+              switch(data2.data.taskTemplateDetail.taskTemplate.content[j].type){
+
+                 case "img":
+                 	var tasknr=document.createElement("ul")
+					tasknr.innerHTML="<img src='"+personalanswer[j]+"' width='200'>"
+					taskdesc.appendChild(tasknr)
+
+                 break;
+
+                 case "radio":
+                 //txt1:获取问题详情
+                 var txt1=data2.data.taskTemplateDetail.taskTemplate.content
+                 for (k=0;k<txt1[j].value.length;k++){
+                    var tasknr=document.createElement("ul")
+                   //alert("用户选择了"+personalanswer[j])
+                    //alert("选项"+txt1[j].value[k])
+                    //alert(txt1[j].value[k]==personalanswer[j])
+                    if(txt1[j].value[k]==personalanswer[j]){
+                    tasknr.innerHTML="<input type='radio' name=Q"+txt1[j]+"value='' checked='checked'>&nbsp;"+txt1[j].value[k]
+                    }else{
+                    tasknr.innerHTML="<input type='radio' name=Q"+txt1[j]+"value=''>&nbsp;"+txt1[j].value[k]
+                    }
+                    taskdesc.appendChild(tasknr)
+                 }
+                 break;
+                 case "geometry":
+
+                 break;
+
+              }
+    	   }
+    	   var targetpagetitle=document.createElement("div");
+           targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul><textarea name='statusDesc' id='statusDesc' cols='85' rows='5'></textarea></u><ul><input type='submit' value='保存' id='savebtn'></ul>";
+           taskdesc.appendChild(targetpagetitle);
+
+
+       }
+    })
  }

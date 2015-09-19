@@ -144,7 +144,7 @@
             taskobj.appendChild(targetbox2)
             taskTemplate=data2.data.taskTemplate.content.length
 
-            if(taskTemplate<0){
+            if(taskTemplate>0){
                for(i=0;i<taskTemplate;i++){
                   var question=data2.data.taskTemplate.content[i].question
                   var type=data2.data.taskTemplate.content[i].type
