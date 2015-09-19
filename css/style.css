@@ -4,6 +4,7 @@
 	margin: 0px;
 	padding: 0px;
 	font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
+	color:#666;
 	font-size: 14px;
 }
 body {
@@ -93,6 +94,7 @@ body, div, ul, li, img{
 	border-radius: 4px;
 	display: block;
 	overflow-y: auto;
+	min-heigh:400px;
 }
 .rightbody .box ul {
 
@@ -259,19 +261,31 @@ body, div, ul, li, img{
 	border:0px;
 }
 /*任务列表*/
-.rightbody .box .listtable{ background:#eee;}
+.rightbody .box .listtable{background:#dcdcdc; text-align:center}
+.rightbody .box .listtable .trhover{background:#fff; height:40px;cursor:pointer;}
+.rightbody .box .listtable .tractive{background:#f1f1f1; height:40px;cursor:pointer;}
+
 .rightbody .box .listtable .t1{background:#eee; height:40px; font-size:16px;padding-left:10px;color:#666}
-.rightbody .box .listtable .t2{ background:#fff;padding-left:10px;color:#666; padding:5px}
+/*.rightbody .box .listtable .t2{ bf8f8f8ackground:#fff;padding-left:10px;color:#666; padding:5px}*/
 .rightbody .box .ztitle{border-bottom:1px solid #999; padding-bottom:5px;font-size:18px; color:#666}
 .rightbody .listtitle {padding:5px 50px; min-height:40px; color:#666}
 .rightbody .listtitle  li{float:left; font-size:32px;line-height:55px;}
 .rightbody .listtitle .name{width:80%}
-.rightbody .listtitle .pushbtn{width:20%;display:block; overflow:auto; line-height:40px; text-align:right}
+.rightbody .listtitle .pushbtn{margin-top:15px;cursor:pointer;border-radius:4px;width:20%;display:block; overflow:auto; line-height:40px; text-align:center;color:#fff; font-size:16px; background:#f68b1f}
 .rightbody .listtitle .pushbtn a{ background:#f68b1f; color:#fff; text-decoration:none; border-radius:4px;padding:8px 20px;}
 /*审核页*/
-
-.lititle{background:#f5ad65;color:#fff}
-.datatd{padding:0px 5px; height:35px; color:#333;text-align:center}
+.datalist{background:#ccc; width:100%;height:40px;}
+.datalist td{text-align:center}
+.lititle{background:#eee;}
+.datatd{padding:0px 5px; height:35px; color:#666;text-align:center;background#dcdcdc}
 .examinebtn{ border:0px; background:#09F; font-size:14px; padding:3px 10px; margin:5px 0px; cursor:pointer}
-.datatr1{background:#eee; cursor:pointer}
-.datatr2{background:#ccc; cursor:pointer}
+.datatr1{background:#fff; cursor:pointer;height:30px;}
+.datatr2{background:#eee; cursor:pointer}
+
+/*分页样式margin-right:8px;padding:5px 15px;cursor:pointer;border-radius:4px;background:#f18d00;color:#fff;border:1px solid #f18d00;width:50px;*/
+
+.page{margin:20px 0px 5px 0px; line-height:30px;}
+.page li{float:left;}
+
+.page .pagemouseover{padding:0px 18px;background:#fff;color:#333;border:1px solid #f18d00;border-radius:4px;cursor:pointer;margin-right:8px;line-height:30px;}
+.page .pagemouseout{padding:0px 18px;background:#f18d00;color:#fff;border:1px solid #f18d00;border-radius:4px;cursor:pointer;margin-right:8px;line-height:30px;}
