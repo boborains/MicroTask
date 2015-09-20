@@ -9,90 +9,8 @@
 <script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/creat_t.js"></script>
 <script type="text/javascript" src="js/js3city.js"></script>
-<script>
-$(function() {
-  $('#submit').click(function() {
-    //var d = {};
-   // var t = $('form').serializeArray();
-    //$.each(t, function() {
-      //d[this.name] = this.value;
-    //});
-    //alert(JSON.stringify(d));
-    alert(JSON.stringify(GetJsonData()));
-    //var json2 = $("form").form2json();
-    //alert(json2);
+<script type="text/javascript" src="js/addtask.js"></script>
 
-    $.ajax({
-        type: "POST",
-        url: "http://m.antzb.com/web/tasktemplate/add.do",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(GetJsonData()),
-        dataType: "json",
-        success: function (message) {
-            if (message > 0) {
-                alert("请求已提交！我们会尽快与您取得联系");
-            }
-        },
-        error: function (message) {
-            alert("提交数据失败！");
-        }
-    });
-
-  });
-});
-
-  function GetJsonData() {
-    var json = {};
-    var t = $('form').serializeArray();
-    $.each(t, function() {
-      json[this.name] = this.value;
-    });
-    //alert(JSON.stringify(json));
-    return json;
-}
-
-/** @serializedParams looks like "prop1=value1&prop2=value2".
-Nested property like 'prop.subprop=value' is also supported **/
-/**
-function paramString2obj (serializedParams) {
-
-var obj={};
-function evalThem (str) {
-var attributeName = str.split("=")[0];
-var attributeValue = str.split("=")[1];
-if(!attributeValue){
-return ;
-}
-
-var array = attributeName.split(".");
-for (var i = 1; i < array.length; i++) {
-var tmpArray = Array();
-tmpArray.push("obj");
-for (var j = 0; j < i; j++) {
-tmpArray.push(array[j]);
-};
-var evalString = tmpArray.join(".");
-// alert(evalString);
-if(!eval(evalString)){
-eval(evalString+"={};");
-}
-};
-eval("obj."+attributeName+"='"+attributeValue+"';");
-
-};
-var properties = serializedParams.split("&");
-for (var i = 0; i < properties.length; i++) {
-evalThem(properties[i]);
-};
-return obj;
-}
-$.fn.form2json = function(){
-var serializedParams = this.serialize();
-var obj = paramString2obj(serializedParams);
-return JSON.stringify(obj);
-}**/
-    
-</script>
 </head>
 
 <body>
@@ -126,22 +44,22 @@ return JSON.stringify(obj);
       <ul>
         <li class="li_left">任务类型</li>
         <li>
-          <input type="radio" name="taskType" checked>
+          <input type="radio" name="taskType" checked value="调研">
           调研</li>
         <li>
-          <input type="radio" name="taskType">
+          <input type="radio" name="taskType" value="搜罗">
           搜罗</li>
         <li>
-          <input type="radio" name="taskType">
+          <input type="radio" name="taskType" value="检查">
           检查</li>
       </ul>
       <ul>
         <li class="li_left">是否需要定位</li>
         <li>
-          <input type="radio" name="isLocation" >
+          <input type="radio" name="isLocation" value="是" >
           是</li>
         <li>
-          <input type="radio" name="isLocation" checked>
+          <input type="radio" name="isLocation" value="否" checked>
           否</li>
       </ul>
       <ul>
@@ -203,7 +121,7 @@ return JSON.stringify(obj);
         </li>
       </ul>
       <ul><li class="li_left">&nbsp;</li><li class="li_right">
-        <input type="button" value="保存" class="savebtn" id="submit">
+        <input type="button" value="保存" class="savebtn" id="submit" onclick="addtask()">
       </li></ul>
     </form>
   </div>
@@ -214,7 +132,7 @@ return JSON.stringify(obj);
 		var target=document.getElementById(e);
 		target.style.display="block";
 		}
-</script> 
+</script>
 <script type="text/javascript" src="js/jquery.js"></script> 
 <script type="text/javascript" src="js/jquery.ui.js"></script> 
 <script type="text/javascript" src="js/moment.min.js"></script> 

@@ -3,7 +3,7 @@
     var totalCount
     var pageNo=1
     var totalPage
-    var pageSize=20
+    var pageSize=30
     loadlist(pageNo,pageSize)
  }
  function loadlist(pageNo,pageSize){
@@ -15,10 +15,18 @@
 	      var pindarr=new Array()
 
 	      var mainbox=document.getElementById("rightbody")
+              var tasklistbox=document.createElement("div")
+              tasklistbox.id="tasklistbox"
+              mainbox.appendChild(tasklistbox)
+              var titlediv=document.createElement("div");
+              titlediv.innerHTML="<ul><li class='name'>任务列表</li></ul>";
+              titlediv.className="listtitle"
+              tasklistbox.appendChild(titlediv);
+              
 	      var listbox=document.createElement("div")
 	      listbox.className="box"
 	      listbox.id="list"
-	      mainbox.appendChild(listbox)
+	      tasklistbox.appendChild(listbox)
 	      if(data.data.result.length>0){
 	      var totalCount=data.data.totalCount
           var totalPage=data.data.totalPage
@@ -43,8 +51,8 @@
                 objul.onmouseout=function(){
                     this.className="trhover"
                 }
-                objul.onclick=function(){
-                   persononetask(pindarr[this.id],pageNo,pageSize)
+                objul.onclick=function(){ 
+                  persononetask(pindarr[this.id],pageNo,pageSize)
                 }
 				pindarr[i]=data.data.result[i].pind
 				var checkStatus
@@ -52,7 +60,7 @@
 				switch(data.data.result[i].checkStatus){
 					case 0://0：待完成，
 						checkStatus="待完成"
-						btn="<input type=button value=查看 class=examinebtn id="+i+" onclick=alert("+pindarr[i]+")>"
+						btn="<input type=button value=查看 class=examinebtn >"
 						break;
 					case 1://1：待审核
 						checkStatus="待审核"
@@ -60,11 +68,11 @@
 						break;
 					case 2://2：审核通过
 						checkStatus="审核通过"
-						btn="<input type=button value=查看 class=examinebtn id="+i+" onclick=alert("+pindarr[i]+")>"
+						btn="<input type=button value=查看 class=examinebtn id="+i+" >"
 						break;
 					case 3://3：未通过
 						checkStatus="未通过"
-						btn="<input type=button value=审核 class=examinebtn>"
+						btn="<input type=button value=查看 class=examinebtn>"
 						break;
 				}
 
@@ -100,13 +108,13 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
     }
     document.getElementById("upbtn").onclick=function(){
           // alert("upbtn");
-        document.getElementById("rightbody").removeChild(document.getElementById("list"));
+        document.getElementById("rightbody").removeChild(document.getElementById("tasklistbox"));
         curnum=pageNo-1;
         loadlist(curnum,pageSize);
     }
     document.getElementById("downbtn").onclick=function(){
            //alert("downbtn");
-        document.getElementById("rightbody").removeChild(document.getElementById("list"));
+        document.getElementById("rightbody").removeChild(document.getElementById("tasklistbox"));
         curnum=pageNo+1
         loadlist(curnum,pageSize);
     }
@@ -124,15 +132,31 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
     }
  }
  function persononetask(id,pageNo,pageSize){
-    document.getElementById("list").style.display="none"
+    document.getElementById("tasklistbox").style.display="none"
     $.ajax({
        url:"http://m.antzb.com/web/personaltask/detail.do?id="+id,
        success:function(data){
            var data2 = eval('(' + data + ')');
           // alert(data2.code)
+           var taskchecklistbox=document.createElement("div")
+           taskchecklistbox.id="taskchecklistbox"
+            document.getElementById("rightbody").appendChild(taskchecklistbox)
+           var titlediv=document.createElement("div");
+           titlediv.innerHTML="<ul><li class='name'>审核任务</li><li class='pushbtn' id='pushbtn1'><img src='images/back.png' style='vertical-align:middle'>返回</li></ul>";
+           titlediv.className="listtitle"
+           taskchecklistbox.appendChild(titlediv);
+           var pushbtn1=document.getElementById("pushbtn1")
+             pushbtn1.onclick=function(){
+             document.getElementById("rightbody").removeChild(taskchecklistbox)
+             document.getElementById("tasklistbox").style.display="block"
+            }
+           //
+//
+//
            var taskobj=document.createElement("div")
            taskobj.className="box"
-           document.getElementById("rightbody").appendChild(taskobj)
+          taskchecklistbox.appendChild(taskobj)
+           
            var taskdesc=document.createElement("div")
            taskdesc.id="taskdesc"
            taskobj.appendChild(taskdesc)
@@ -140,19 +164,25 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
     	   targetpagetitle.innerHTML="<ul class='ztitle'>任务详情</ul><ul>任务名称："+data2.data.taskTemplateDetail.taskTitle+data2.data.personalTaskDetail.pind+"</ul><ul>任务描述："+data2.data.taskTemplateDetail.taskDesc+"</ul><ul><span>已做任务："+data2.data.taskTemplateDetail.hasDoneCount+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>任务总数："+data2.data.taskTemplateDetail.taskCount+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>任务价格："+data2.data.taskTemplateDetail.taskFee+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>价格类型："+data2.data.taskTemplateDetail.priceType+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>任务状态描述："+data2.data.taskTemplateDetail.taskStatusDesc+"</span></ul><ul>任务内容：</ul>"
     	   taskdesc.appendChild(targetpagetitle)
     	   var personalanswer=new Array();
+    	   //var dic={};
+    	   //dic=data2.data.personalTaskDetail.taskContent;
+    	   //var keys=dic.Keys().toArray();//将obj对象的键值转换成数组
+
     	   //alert("共"+data2.data.taskTemplateDetail.taskTemplate.content.length+"题")
     	   for(j=0;j<data2.data.taskTemplateDetail.taskTemplate.content.length;j++){
               var tasknr=document.createElement("ul")
               tasknr.innerHTML="Q"+data2.data.taskTemplateDetail.taskTemplate.content[j].index+"："+data2.data.taskTemplateDetail.taskTemplate.content[j].question
-              personalanswer[j]=data2.data.personalTaskDetail.taskContent[j+1]
+              personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index]=data2.data.personalTaskDetail.taskContent[data2.data.taskTemplateDetail.taskTemplate.content[j].index]
 
+              //var www=
+    	      //alert(data2.data.taskTemplateDetail.taskTemplate.content[j].index+"++++++++"+data2.data.personalTaskDetail.taskContent[data2.data.taskTemplateDetail.taskTemplate.content[j].index])
               taskdesc.appendChild(tasknr)
               switch(data2.data.taskTemplateDetail.taskTemplate.content[j].type){
 
                  case "img":
-                 	var tasknr=document.createElement("ul")
-					tasknr.innerHTML="<img src='"+personalanswer[j]+"' width='200'>"
-					taskdesc.appendChild(tasknr)
+                    var tasknr=document.createElement("ul");
+                    tasknr.innerHTML="<img src='"+personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index]+"' width='200'>";
+                    taskdesc.appendChild(tasknr);
 
                  break;
 
@@ -164,25 +194,102 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
                    //alert("用户选择了"+personalanswer[j])
                     //alert("选项"+txt1[j].value[k])
                     //alert(txt1[j].value[k]==personalanswer[j])
-                    if(txt1[j].value[k]==personalanswer[j]){
-                    tasknr.innerHTML="<input type='radio' name=Q"+txt1[j]+"value='' checked='checked'>&nbsp;"+txt1[j].value[k]
+                    if(txt1[j].value[k]==personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index]){
+                    tasknr.innerHTML="<input type='radio' name=Q"+txt1[j].index+"value='' checked='checked'>&nbsp;"+txt1[j].value[k]
                     }else{
-                    tasknr.innerHTML="<input type='radio' name=Q"+txt1[j]+"value=''>&nbsp;"+txt1[j].value[k]
+                    tasknr.innerHTML="<input type='radio' name=Q"+txt1[j].index+"value=''>&nbsp;"+txt1[j].value[k]
                     }
                     taskdesc.appendChild(tasknr)
                  }
                  break;
                  case "geometry":
+                    
+                    var tasknr=document.createElement("ul");
+                    tasknr.innerHTML=personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index];
+                    taskdesc.appendChild(tasknr);
 
                  break;
 
               }
     	   }
-    	   var targetpagetitle=document.createElement("div");
-           targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul><textarea name='statusDesc' id='statusDesc' cols='85' rows='5'></textarea></u><ul><input type='submit' value='保存' id='savebtn'></ul>";
-           taskdesc.appendChild(targetpagetitle);
+    	   //alert(data2.data.personalTaskDetail.checkStatus)
+    	   switch (data2.data.personalTaskDetail.checkStatus){
 
+    	        case 1://未审核
+    	            var targetpagetitle=document.createElement("div");
+                    targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul><textarea name='statusDesc' id='statusDesc' cols='85' rows='5'></textarea></u><ul><input type='submit' value='审核通过' id='checkOk'><input type='submit' value='审核不通过' id='checkNo'></ul>";
+                    taskdesc.appendChild(targetpagetitle);
+    	        break;
+    	        case 2://审核通过
+    	            var targetpagetitle=document.createElement("div");
+                    targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul></u>"+data2.data.personalTaskDetail.statusDesc+"</ul>";
+                    taskdesc.appendChild(targetpagetitle);
+    	        break;
+    	        case 3://审核未通过
+    	            var targetpagetitle=document.createElement("div");
+                    targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul></u>"+data2.data.personalTaskDetail.statusDesc+"</ul>";
+                    taskdesc.appendChild(targetpagetitle);
+    	        break;
 
+    	   }
+           //提交审核通过
+           $("#checkOk").click(function(){
+               var pind=data2.data.personalTaskDetail.pind;
+               var checkDesc = document.getElementById("statusDesc").value
+               $.ajax({
+                    type: "POST",
+                    url: "http://m.antzb.com/web/personaltask/audit.do?pind="+pind+"&checkStatus="+2+"&checkDesc="+statusDesc,
+                    dataType:"json",
+                    data: "",//"{'pind':pind,'checkStatus':2,statusDesc':statusDesc}",
+                    success: function(message) {
+                        alert("OK1"+message)
+                        showtips("审核成功！")
+                        persononetask(pind,pageNo,pageSize)
+                    },
+                    error: function (message) {
+                        showtips("提交数据失败！")
+                        //alert("提交数据失败！"+message);
+                    }
+                }); 
+                
+            })
+           //提交审核不通过
+           $("#checkNo").click(function(){
+               alert("checkNo")
+            })
+           //
        }
     })
  }
+function showtips(tt){
+    var layer=document.createElement("div");
+    var txt=document.createElement("div");
+    layer.id="layer";
+        var style={
+        background:"#000",
+        position:"absolute",
+        zIndex:10,
+        width:"500px",
+        //border:"4px solid red",
+        radius:"4px",
+        color:"#fff",
+        algin:"center",
+        padding:"20px 10px"
+        
+    }
+        leftn=(window.screen.width)/2-500;
+        topn=(window.screen.height)/2-300;
+    txt.className="tipsbox"
+    txt.innerHTML=tt
+    layer.appendChild(txt)
+    layer.style.left=leftn+"px";
+    layer.style.top=topn+"px";
+    for(var i in style)
+        layer.style[i]=style[i];   
+    if(document.getElementById("layer")==null){
+        document.body.appendChild(layer);
+        setTimeout("document.body.removeChild(layer)",2000)
+    }
+    
+    
+}

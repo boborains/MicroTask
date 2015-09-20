@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+<script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>
+<body>
+
+<script type="text/javascript">
+
+
+    (function($){
+            $.fn.serializeJson=function(){
+                var serializeObj={};
+                var array=this.serializeArray();
+                var str=this.serialize();
+                $(array).each(function(){
+                    if(serializeObj[this.name]){
+                        if($.isArray(serializeObj[this.name])){
+                            serializeObj[this.name].push(this.value);
+                        }else{
+                            serializeObj[this.name]=[serializeObj[this.name],this.value];
+                        }
+                    }else{
+                        serializeObj[this.name]=this.value;
+                    }
+                });
+                return serializeObj;
+            };
+        })(jQuery);
+
+
+</script>
+
+<form id="myForm" action="#">
+  <input name="name"/>
+  <input name="age"/>
+  <select multiple="multiple" name="interest" size="2">
+    <option value ="interest1">interest1</option>
+    <option value ="interest2">interest2</option>
+    <option value="interest3">interest3</option>
+    <option value="interest4">interest4</option>
+  </select>
+  <input type="checkbox" name="vehicle" value="Bike" /> I have a bike
+  <input type="checkbox" name="vehicle" value="Car" /> I have a car
+  <input type="submit"/>
+</form>
+
+</body>
+</html>

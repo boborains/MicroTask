@@ -282,13 +282,24 @@ body, div, ul, li, img{
 .examinebtn{ border:0px; background:#09F; font-size:14px; padding:3px 10px; margin:5px 0px; cursor:pointer}
 .datatr1{background:#fff; cursor:pointer;height:30px;}
 .datatr2{background:#eee; cursor:pointer}
-#savebtn{background:#f68b1f;
+#checkOk{background:#f68b1f;
   	font-size:30px;
   	text-decoration:none;
   	color:#fff;
   	padding:20px 60px;
   	cursor:pointer;
-  	border:0px;}
+  	border:0px;
+        margin-right: 25px;
+        margin-top: 25px;}
+#checkNo{background:#ff5400;
+  	font-size:30px;
+  	text-decoration:none;
+  	color:#fff;
+  	padding:20px 60px;
+  	cursor:pointer;
+  	border:0px;
+        margin-right: 25px;
+        margin-top: 25px;}
 /*分页样式margin-right:8px;padding:5px 15px;cursor:pointer;border-radius:4px;background:#f18d00;color:#fff;border:1px solid #f18d00;width:50px;*/
 
 .page{margin:20px 0px 5px 0px; line-height:30px;}
@@ -296,3 +307,5 @@ body, div, ul, li, img{
 
 .page .pagemouseover{padding:0px 18px;background:#fff;color:#333;border:1px solid #f18d00;border-radius:4px;cursor:pointer;margin-right:8px;line-height:30px;}
 .page .pagemouseout{padding:0px 18px;background:#f18d00;color:#fff;border:1px solid #f18d00;border-radius:4px;cursor:pointer;margin-right:8px;line-height:30px;}
+
+.tipsbox{color:#fff;text-align:center;line-height:35px;font-size:16px;}

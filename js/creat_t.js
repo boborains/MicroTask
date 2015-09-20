@@ -111,7 +111,7 @@ function addradio(Targetbox,targettxt){
 		case "onetext"://文本题
 		var objli = document.createElement("ul");
 		var num=box.getElementsByClassName("qcss").length+1
-		var onetext="<li id='t"+num+"' class='atline'><div><ul><li class='left'>Q"+num+"<input type='text' value='文本题' class='input1' onFocus=this.className='input2' onBlur=this.className='input1' onMouseOver=this.className='input3' onMouseOut=this.className='input1'></li><li class='right' id='btn0' style='display:none'><img src='images/i4.png' onClick=delli('tasklist','q"+num+"')></li></ul></div></li>"
+		var onetext="<li id='t"+num+"' class='atline'><div><ul><li class='left'>Q"+num+"<input type='text' value='文本题' class='input1' name='Q"+num+"' onFocus=this.className='input2' onBlur=this.className='input1' onMouseOver=this.className='input3' onMouseOut=this.className='input1'></li><li class='right' id='btn0' style='display:none'><img src='images/i4.png' onClick=delli('tasklist','q"+num+"')></li></ul></div></li>"
 		box.appendChild(objli)
 		objli.id="q"+num
 	    objli.className="qcss"
