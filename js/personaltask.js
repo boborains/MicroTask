@@ -11,9 +11,7 @@
 	   url:"http://m.antzb.com/web/personaltask/items.do?pageNo="+pageNo+"&pageSize="+pageSize,
 	   success:function(data){
 	      var data = eval('(' + data + ')');
-
 	      var pindarr=new Array()
-
 	      var mainbox=document.getElementById("rightbody")
               var tasklistbox=document.createElement("div")
               tasklistbox.id="tasklistbox"
@@ -60,23 +58,23 @@
 				switch(data.data.result[i].checkStatus){
 					case 0://0：待完成，
 						checkStatus="待完成"
-						btn="<input type=button value=查看 class=examinebtn >"
+						btn="<input type=button value=查看 class='examinebtn1' >"
 						break;
 					case 1://1：待审核
 						checkStatus="待审核"
-						btn="<input type=button value=审核 class=examinebtn>"
+						btn="<input type=button value=审核 class='examinebtn2'>"
 						break;
 					case 2://2：审核通过
 						checkStatus="审核通过"
-						btn="<input type=button value=查看 class=examinebtn id="+i+" >"
+						btn="<input type=button value=查看 class='examinebtn1' id="+i+" >"
 						break;
 					case 3://3：未通过
 						checkStatus="未通过"
-						btn="<input type=button value=查看 class=examinebtn>"
+						btn="<input type=button value=查看 class='examinebtn1'>"
 						break;
 				}
 
-				objul.innerHTML="<td class='datatd'>"+data.data.result[i].userName+"</td><td class='datatd'>"+data.data.result[i].submit+"</td><td class='datatd'>"+checkStatus+"</td><td class='datatd'>"+data.data.result[i].statusDesc+"</td><td class='datatd'>"+btn+"</td>"
+				objul.innerHTML="<td class='datatd'>"+data.data.result[i].userName+"</td><td class='datatd'>"+data.data.result[i].submit+"</td><td class='datatd'>"+checkStatus+"</td><td class='datatd'>"+data.data.result[i].checkDesc+"</td><td class='datatd'>"+btn+"</td>"
 				curlist.appendChild(objul);
 			 }
 			 setpage(pageNo,pageSize,totalCount,totalPage)
@@ -132,6 +130,7 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
     }
  }
  function persononetask(id,pageNo,pageSize){
+
     document.getElementById("tasklistbox").style.display="none"
     $.ajax({
        url:"http://m.antzb.com/web/personaltask/detail.do?id="+id,
@@ -142,7 +141,11 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
            taskchecklistbox.id="taskchecklistbox"
             document.getElementById("rightbody").appendChild(taskchecklistbox)
            var titlediv=document.createElement("div");
-           titlediv.innerHTML="<ul><li class='name'>审核任务</li><li class='pushbtn' id='pushbtn1'><img src='images/back.png' style='vertical-align:middle'>返回</li></ul>";
+           if (data2.data.personalTaskDetail.checkStatus!=1){
+                titlediv.innerHTML="<ul><li class='name'>任务完成详情</li><li class='pushbtn' id='pushbtn1'><img src='images/back.png' style='vertical-align:middle'>返回</li></ul>";
+           }else{
+                titlediv.innerHTML="<ul><li class='name'>审核任务</li><li class='pushbtn' id='pushbtn1'><img src='images/back.png' style='vertical-align:middle'>返回</li></ul>";
+           }
            titlediv.className="listtitle"
            taskchecklistbox.appendChild(titlediv);
            var pushbtn1=document.getElementById("pushbtn1")
@@ -217,17 +220,17 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
 
     	        case 1://未审核
     	            var targetpagetitle=document.createElement("div");
-                    targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul><textarea name='statusDesc' id='statusDesc' cols='85' rows='5'></textarea></u><ul><input type='submit' value='审核通过' id='checkOk'><input type='submit' value='审核不通过' id='checkNo'></ul>";
+                    targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul><textarea name='checkdesc' id='checkdesc' cols='85' rows='5'></textarea></u><ul><input type='submit' value='审核通过' id='checkOk'><input type='submit' value='审核不通过' id='checkNo'></ul>";
                     taskdesc.appendChild(targetpagetitle);
     	        break;
     	        case 2://审核通过
     	            var targetpagetitle=document.createElement("div");
-                    targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul></u>"+data2.data.personalTaskDetail.statusDesc+"</ul>";
+                    targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul></u>"+data2.data.personalTaskDetail.checkDesc+"</ul>";
                     taskdesc.appendChild(targetpagetitle);
     	        break;
     	        case 3://审核未通过
     	            var targetpagetitle=document.createElement("div");
-                    targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul></u>"+data2.data.personalTaskDetail.statusDesc+"</ul>";
+                    targetpagetitle.innerHTML="<ul class='ztitle'>审核意见：</ul><ul></u>"+data2.data.personalTaskDetail.checkDesc+"</ul>";
                     taskdesc.appendChild(targetpagetitle);
     	        break;
 
@@ -235,23 +238,36 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
            //提交审核通过
            $("#checkOk").click(function(){
                var pind=data2.data.personalTaskDetail.pind;
-               var checkDesc = document.getElementById("statusDesc").value
+               var checkdesc = document.getElementById("checkdesc").value
                $.ajax({
                     type: "POST",
-                    url: "http://m.antzb.com/web/personaltask/audit.do?pind="+pind+"&checkStatus="+2+"&checkDesc="+statusDesc,
+                    url: "http://m.antzb.com/web/personaltask/audit.do",
                     dataType:"json",
-                    data: "",//"{'pind':pind,'checkStatus':2,statusDesc':statusDesc}",
+                    data: {"pind":pind,"checkStatus":"2","checkDesc":checkdesc},
                     success: function(message) {
-                        alert("OK1"+message)
-                        showtips("审核成功！")
-                        persononetask(pind,pageNo,pageSize)
+                        //alert("OK1"+message.code+"+++++"+pageNo+"===="+pageSize)
+                        switch (message.code){
+                         case 200:
+                        //alert("审核成功！")
+                        document.getElementById("rightbody").removeChild(document.getElementById("taskchecklistbox"))
+                         persononetask(pind,pageNo,pageSize)
+                         showtips("审核成功！")
+                         
+                         
+                         break;
+                        // case 400:
+                         //alert("个人任务中的用户不存在")
+                         //break;
+                        }
+                        //
                     },
                     error: function (message) {
                         showtips("提交数据失败！")
                         //alert("提交数据失败！"+message);
                     }
-                }); 
+                });
                 
+               
             })
            //提交审核不通过
            $("#checkNo").click(function(){

@@ -20,45 +20,27 @@
     #pCon1 {width:100%;list-style:none;}
     #pCon1 li {line-height: 35px;height:35px;display:block;border-bottom:1px #ccc solid; background: #0078ff}
     #pCon1 li a{margin-left:5px;text-decoration:none;}
-    
-    
-#listQA{width:500px;display:block; overflow-y: auto;}
-#listQA .qagroup{ background: #eee; margin-bottom: 50px;border-radius: 4px;}
-#listQA .qagroup div{line-height:30px;}
-#listQA .qagroup .num{float:left;display:inline;height:30px;margin-right: 5px}
-#listQA .qagroup .QTitle{float:left;display:inline;height:30px;}
-#listQA .qagroup .qa{border-bottom:1px solid #333;height:30px;padding-left:10px;}
-#listQA .qagroup #A div{list-style:none;clear:both;line-height: 30px;padding-left:10px;}
+#listqa{width:500px;background: #eee;display:block; overflow-y: auto;}
+#listqa .qagroup{ background: #ccc;}
+#listqa .qagroup .num{float:left;display:inline;}
+#listqa .qagroup .QTitle{float:left;display:inline;}
+#listqa .qagroup .qa{border-bottom:1px solid #333}
 </style>
 </head>
 <body>
-
-    <div id="listQA" class="listQA">
+<div class="content">
+<ul id="pCon1">
+    <li id="Q1"><div class="no" id="num">Q1</div><div class="context" id="Q">测试数据你相信么A</div>    </li>
+    <li id="Q2"><div class="no" id="num">Q2</div><div class="context" id="Q">测试数据你相信么B</div></li>
+    <li id="Q3"><div class="no" id="num">Q3</div><div class="context" id="Q">测试数据你相信么C</div></li>
+    <li id="Q4"><div class="no" id="num">Q4</div><div class="context" id="Q">测试数据你相信么D</div></li>
+</ul>
+</div>
+    <div id="listqa" class="listqa">
         <ul id="Q1" class="qagroup">
             <li id="Q" class="qa">
-                <div id="num" class="num">Q</div>
-                <div class="QTitle" class="QTitle">QTitle1</div>
-            </li>
-            <li id="A">
-                <div>A1</div>
-                <div>A2</div>
-            </li>
-        </ul>
-        <ul id="Q2" class="qagroup">
-            <li id="Q" class="qa">
-                <div id="num" class="num">Q2</div>
-                <div class="QTitle" class="QTitle">QTitle2</div>
-            </li>
-            <li id="A">
-                <div>A1</div>
-                <div>A2</div>
-            </li>
-        </ul>
-        
-        <ul id="Q3" class="qagroup">
-            <li id="Q" class="qa">
-                <div id="num" class="num">Q3</div>
-                <div class="QTitle" class="QTitle">QTitle3</div>
+                <div id="num" class="num">Q1</div>
+                <div class="QTitle" class="QTitle">QTitle</div>
             </li>
             <li id="A">
                 <div>A1</div>
@@ -161,9 +143,7 @@ function insertAfter(newElement, targetElement){
 function myOrder(myList,m,mO,mT,mD){
 //myList为ul的id值，m为0显示文字，m为1显示图片，mO、mT为文字或图片内容
     var pCon=document.getElementById(myList);
-    var pSon=document.getElementsByClassName("qa")
-    
-    //var pSon=pCon.getElementsByTagName("ul").getElementsByTagName("li");
+    var pSon=pCon.getElementsByTagName("li");
     for(i=0;i<pSon.length;i++){
         var conTemp=document.createElement("div");
         conTemp.setAttribute("class","control");
@@ -193,18 +173,17 @@ function myOrder(myList,m,mO,mT,mD){
         conTemp.appendChild(clickDown);
         conTemp.appendChild(clickDel);
         clickUp.onclick=function(){
-           // alert(this.parentNode.parentNode.parentNode.id)
-            moveSonU(this.parentNode.parentNode.parentNode,myList);
+            moveSonU(this.parentNode.parentNode,myList);
         }
         clickDown.onclick=function(){
-            moveSonD(this.parentNode.parentNode.parentNode);
+            moveSonD(this.parentNode.parentNode);
         }
         clickDel.onclick=function(){
-            delSon(this.parentNode.parentNode.parentNode,myList);
+            delSon(this.parentNode.parentNode,myList);
         }
     }
 }
-myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg");
+myOrder("pCon1",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg");
 </script>
 </body>
 </html>

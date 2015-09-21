@@ -54,26 +54,24 @@ body, div, ul, li, img{
 	line-height: 40px;
 	font-size: 16px;
 }
-.leftnav .active {background:#ff9900; color: #fff}
-
-.leftnav li a.a01{ text-decoration: none;color:#ff9900;padding-left:55px;font-size: 16px;position: relative;display: block;background:url(../images/i01.png) no-repeat 25px;}
-.leftnav li a.a01:hover{background:url(../images/i01.png) no-repeat 25px;background-color:#eee;line-height: 40px;}
-.leftnav li a.a02{ text-decoration: none;color:#ff9900;padding-left:55px;font-size: 16px;position: relative;display: block;background:url(../images/i02.png) no-repeat 25px;}
-.leftnav li a.a02:hover{background:url(../images/i02.png) no-repeat 25px;background-color:#eee;line-height: 40px;}
-.leftnav li a.a03{ text-decoration: none;color:#ff9900;padding-left:55px;font-size: 16px;position: relative;display: block;background:url(../images/i03.png) no-repeat 25px;}
-.leftnav li a.a03:hover{background:url(../images/i03.png) no-repeat 25px;background-color:#eee;line-height: 40px;}
-
-.leftnav .active a.a01{ text-decoration: none;color:#fff;padding-left:55px;font-size: 16px;position: relative;display: block;background:url(../images/i01_.png) no-repeat 25px;}
-.leftnav .active a.a01:hover{background:url(../images/i01_.png) no-repeat 25px;line-height: 40px;}
-
-
-.leftnav .active a.a02{ text-decoration: none;color:#fff;padding-left:55px;font-size: 16px;position: relative;display: block;background:url(../images/i02_.png) no-repeat 25px;}
-.leftnav .active a.a02:hover{background:url(../images/i02_.png) no-repeat 25px;line-height: 40px;}
-
-.leftnav .active a.a03{ text-decoration: none;color:#fff;padding-left:55px;font-size: 16px;position: relative;display: block;background:url(../images/i03_.png) no-repeat 25px;}
-.leftnav .active a.a03:hover{background:url(../images/i03_.png) no-repeat 25px;line-height: 40px;}
-
-
+.leftnav li a {
+	padding-left: 25px;
+	text-decoration: none;
+	color: #f18d00;
+	position: relative;
+	display: block;
+}
+.leftnav li a:hover {
+	background: #eee
+}
+.leftnav li.active {
+	background: #f18d00;
+	color: #fff;
+}
+.leftnav li.active a {
+	background: #f18d00;
+	color: #fff;
+}
 .rightbody {
 	width: 84%;
 	background: #eee;
@@ -281,8 +279,7 @@ body, div, ul, li, img{
 .datalist td{text-align:center}
 .lititle{background:#eee;}
 .datatd{padding:0px 5px; height:35px; color:#666;text-align:center;background#dcdcdc}
-.datatd .examinebtn1{ border:1px solid #ccc; background:#fff; font-size:14px; padding:3px 10px; margin:5px 0px; cursor:pointer}
-.datatd .examinebtn2{ border:0px; background:#f68b1f; color:#fff; font-size:14px; padding:3px 10px; margin:5px 0px; cursor:pointer}
+.examinebtn{ border:0px; background:#09F; font-size:14px; padding:3px 10px; margin:5px 0px; cursor:pointer}
 .datatr1{background:#fff; cursor:pointer;height:30px;}
 .datatr2{background:#eee; cursor:pointer}
 #checkOk{background:#f68b1f;
@@ -312,12 +309,3 @@ body, div, ul, li, img{
 .page .pagemouseout{padding:0px 18px;background:#f18d00;color:#fff;border:1px solid #f18d00;border-radius:4px;cursor:pointer;margin-right:8px;line-height:30px;}
 
 .tipsbox{color:#fff;text-align:center;line-height:35px;font-size:16px;}
-
-/*发布题内容样式*/
-#listQA{width:100%;display:block; overflow-y: auto;background: #FFC}
-#listQA .qagroup{ background: #eee; margin-bottom: 50px;border-radius: 4px;}
-#listQA .qagroup div{line-height:30px;}
-#listQA .qagroup .num{float:left;display:inline;height:30px;margin-right: 5px}
-#listQA .qagroup .QTitle{float:left;display:inline;height:30px;}
-#listQA .qagroup .qa{clear:none;border-bottom:1px solid #333;height:30px;padding-left:10px; background: #f18d00;width: 100%;overflow-x: auto}
-#listQA .qagroup #A div{list-style:none;clear:both;line-height: 30px;padding-left:10px;}
