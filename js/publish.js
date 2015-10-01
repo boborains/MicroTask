@@ -26,6 +26,7 @@ function creatTask(step){
     if (step==1){
         newTask()
     }else{
+        //alert("tempbtn")
         tempTask()
     }
 }
@@ -43,6 +44,73 @@ function newTask(){
 //模版任务创建
 function tempTask(){
 
+    //alert("tempTask")
+    var obj=document.getElementById("rightbody")
+    obj.removeChild(document.getElementById("step2"))
+    var step3=document.createElement("div")
+    step3.id="step3"
+    step3.innerHTML="<div id='step3'><div class='titlename' ><ul><li class='li1'>设计任务</li><li class='li2' onclick=setTask()>任务设置 </li><li class='li2' onclick=savetaskdesgin()> 保存任务 </li></ul></div><div class='boxs'><ul class='txt'>任务标题:"+taskTitle+"</ul><ul><li class='leftli1'><div class='typetitle'>模板类型</div><div class='typeboxtemp_active' id='tempbtn1' onclick=showTemp(1)>超市检查</br><p style='font-size:12px;line-height:16px;color:#ccc;'>规定超市检查可以拍下1-5张照片包括超市名称、端架、货架、堆头包柱，固定暂时不允许增删。</p></div><div class='typeboxtemp' id='tempbtn2' onclick=showTemp(2)>户外广告监察</br><p style='font-size:12px;line-height:16px;color:#ccc;'>规定户外广告监察只拍一张照片和记录当前拍照的时间，固定暂时不允许增删。</p></div><div class='typeboxtemp' id='tempbtn3' onclick=showTemp(3)>收罗</br><p style='font-size:12px;line-height:16px;color:#ccc;'>规定收罗包括名称图文地址图文，记录当前时间固定暂时不允许增删。</p></div></li><li class='rightli0' id ='rightli0'></li></ul></div></div>"
+    obj.appendChild(step3)
+    createTemp(1)
+}
+//模版创建按钮事件
+function showTemp(num){
+    for(i=1;i<4;i++){
+        document.getElementById("tempbtn"+i).className="typeboxtemp"
+    }
+    document.getElementById("tempbtn"+num).className="typeboxtemp_active"
+    //var obj=
+    var objf=document.getElementById("rightli0")
+    objf.removeChild(document.getElementById("listQA"))
+    createTemp(num)
+
+}
+//创建模版题列表
+function createTemp(num){
+    var obj=document.getElementById("rightli0")
+    var listQA=document.createElement("div")
+    listQA.id="listQA"
+    listQA.className="listQA"
+    obj.appendChild(listQA)
+    switch (num){
+    case 1:
+    appquestion(4)
+    appquestion(3)
+    appquestion(4)
+    appquestion(4)
+    appquestion(4)
+    appquestion(4)
+    var titleArray=new Array("请拍下超市名称照片","请输入超市名称","请拍下端架照片","请拍下货架照片","请拍下堆头照片","请拍下包柱照片")
+    for(i=0;i< document.getElementsByClassName("control").length;i++){
+    document.getElementsByClassName("control")[i].getElementsByTagName("img")[0].style.display="none"
+    document.getElementsByClassName("control")[i].getElementsByTagName("img")[1].style.display="none"
+    document.getElementsByClassName("QTitle")[i].getElementsByTagName("input")[0].value=titleArray[i]
+    }
+    break;
+    case 2:
+    appquestion(4)
+    appquestion(3)
+    var titleArray=new Array("请拍下户外广告的全身照片","请输入广告所在地址信息")
+    for(i=0;i< document.getElementsByClassName("control").length;i++){
+    document.getElementsByClassName("control")[i].getElementsByTagName("img")[0].style.display="none"
+    document.getElementsByClassName("control")[i].getElementsByTagName("img")[1].style.display="none"
+    document.getElementsByClassName("QTitle")[i].innerHTML=titleArray[i]
+    }
+    break;
+    case 3:
+    appquestion(3)
+    appquestion(4)
+    appquestion(3)
+    appquestion(4)
+    appquestion(5)
+    var titleArray=new Array("请输入名称","请拍下名称","请输入地址","请拍下地址信息","获取GPS定位信息")
+    for(i=0;i< document.getElementsByClassName("control").length;i++){
+    document.getElementsByClassName("control")[i].getElementsByTagName("img")[0].style.display="none"
+    document.getElementsByClassName("control")[i].getElementsByTagName("img")[1].style.display="none"
+    document.getElementsByClassName("QTitle")[i].innerHTML=titleArray[i]
+    }
+    break;
+    }
 }
 //保存设计
 function savetaskdesgin(){
@@ -53,9 +121,9 @@ function savetaskdesgin(){
 
     var qacount=obj.length;
      //alert(qacount);
-     var qaarea=new Array();
-     var types;
-     var value="";
+    var qaarea=new Array();
+    var types;
+    var value="";
     for(i=0;i<qacount;i++){
         //alert(obj[i].getElementsByClassName("QTitle")[0].getElementsByTagName("input")[0].value);
         var label=obj[i].getElementsByClassName("QTitle")[0].getElementsByTagName("input")[0].value;
@@ -123,29 +191,30 @@ function appquestion(type){
     qagroup.className="qagroup"
     switch (type){
     case 1:
-        qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='单选题'></div></li><li id='A' class='aa'><div id='1'><ul class='leftul'><input type='radio' name="+qagroup.id+"><input type='text' value='选项1'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,'1',"+qagroup.id+")><img src='images/i4.png' onclick=delaa(this)></ul></div><div id='2'><ul class='leftul'><input type='radio' name="+qagroup.id+"><input type='text' value='选项2'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,'1',"+qagroup.id+")><img src='images/i4.png' onclick=delaa(this)></ul></div></li>"
+        qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='单选题'></div></li><li id='A' class='aa'><div id='1'><ul class='leftul'><input type='radio' name="+qagroup.id+"><input type='text' value='选项1'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,'1',"+qagroup.id+")><img src='images/i4.png' onclick=delaa(this)></ul></div></li>"
         obj.appendChild(qagroup)
-        myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","images/ico5.jpg",qagroup.id);
+        myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","",qagroup.id);
         break;
     case 2:
-        qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='多选题'></div></li><li id='A' class='aa'><div id='1'><ul class='leftul'><input type='checkbox' name="+qagroup.id+"><input type='text' value='选项1'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,'1',"+qagroup.id+")><img src='images/i4.png' onclick=delaa(this)></ul></div><div id='2'><ul class='leftul'><input type='checkbox' name="+qagroup.id+"><input type='text' value='选项2'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,'1',"+qagroup.id+")><img src='images/i4.png' onclick=delaa(this)></ul></div></li>"
+        qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='多选题'></div></li><li id='A' class='aa'><div id='1'><ul class='leftul'><input type='checkbox' name="+qagroup.id+"><input type='text' value='选项1'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,'1',"+qagroup.id+")><img src='images/i4.png' onclick=delaa(this)></ul></div></li>"
         obj.appendChild(qagroup)
-        myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","images/ico5.jpg",qagroup.id);
+        myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","",qagroup.id);
     break;
     case 3:
         qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='填空题'></div></li><li id='A' class='aa'><div id='1'><ul class='qbox'></ul></div></li>"
         obj.appendChild(qagroup)
-        myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","images/ico5.jpg",qagroup.id);
+        myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","",qagroup.id);
     break;
     case 4:
         qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='拍照题'></div></li><li id='A' class='aa'><div id='1'><ul class='photobox'>+</ul></div></li>"
         obj.appendChild(qagroup)
-        myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","images/ico5.jpg",qagroup.id);
+        myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","",qagroup.id);
     break;
     case 5:
         qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='地图定位'></div></li><li id='A' class='aa'><div id='1'><ul class='qbox'></ul></div></li>"
         obj.appendChild(qagroup)
-        myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","images/ico5.jpg",qagroup.id);
+        myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","",qagroup.id);
+        //myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","images/ico5.jpg",qagroup.id);
     break;
     }
 

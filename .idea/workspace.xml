@@ -2,50 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8f75e9e-a513-4121-a4e9-2cd36a9cf2bb" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/css/smoothness/images/Thumbs.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/back.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i01_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i02_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i03_.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/i5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/ico0.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/ico1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/ico2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/ico3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/ico4.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/more_bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/css/smoothness/images/ui-bg_flat_75_ffffff_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/ui_date_bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/ui_header_bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/images/未标题-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/css/css.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/examine.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/js/jquery-1.7.2.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/css/smoothness/jquery.ui.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/js/personaltask.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/css/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/css/style_1.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/两个列表页/js/tasklist.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/publish_L.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/i4.png" afterPath="$PROJECT_DIR$/images/i4.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/i5.png" afterPath="$PROJECT_DIR$/images/i5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/000.html" afterPath="$PROJECT_DIR$/000.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examine.html" afterPath="$PROJECT_DIR$/examine.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/list.html" afterPath="$PROJECT_DIR$/list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/personaltask.js" afterPath="$PROJECT_DIR$/js/personaltask.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/publish_new.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/publish.html" afterPath="$PROJECT_DIR$/publish.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/publish.js" afterPath="$PROJECT_DIR$/js/publish.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/tasklist.js" afterPath="$PROJECT_DIR$/js/tasklist.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MicroTask.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,21 +30,9 @@
       <file leaf-file-name="publish.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/publish.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30659536">
-              <caret line="125" column="676" selection-start-line="125" selection-start-column="676" selection-end-line="125" selection-end-column="676" />
+            <state vertical-scroll-proportion="0.9489796">
+              <caret line="145" column="30" selection-start-line="145" selection-start-column="30" selection-end-line="145" selection-end-column="30" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="publish_new.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/publish_new.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.25">
-              <caret line="10" column="63" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
-              <folding>
-                <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -115,8 +63,8 @@
         <option value="$PROJECT_DIR$/js/tasklist.js" />
         <option value="$PROJECT_DIR$/publish.html" />
         <option value="$PROJECT_DIR$/000.html" />
-        <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/publish_new.html" />
+        <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/js/publish.js" />
       </list>
     </option>
@@ -623,14 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.4074073">
-          <caret line="378" column="100" selection-start-line="378" selection-start-column="100" selection-end-line="378" selection-end-column="100" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/personaltask.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.666667">
@@ -655,20 +595,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/publish_new.html">
+    <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.25">
-          <caret line="10" column="63" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
-          <folding>
-            <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.5187266">
+          <caret line="346" column="117" selection-start-line="346" selection-start-column="117" selection-end-line="346" selection-end-column="117" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/publish.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30659536">
-          <caret line="125" column="676" selection-start-line="125" selection-start-column="676" selection-end-line="125" selection-end-column="676" />
+        <state vertical-scroll-proportion="0.9489796">
+          <caret line="145" column="30" selection-start-line="145" selection-start-column="30" selection-end-line="145" selection-end-column="30" />
           <folding />
         </state>
       </provider>
