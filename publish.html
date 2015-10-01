@@ -98,7 +98,7 @@ return JSON.stringify(obj);
 <body>
 <div class="topnav">
   <ul>
-    Name
+小蚂蚁自助平台
   </ul>
 </div>
 <div class="leftnav">
@@ -201,12 +201,14 @@ return JSON.stringify(obj);
             <div id="listQA" class="listQA">
                 <ul id="Q1" class="qagroup">
                     <li id="Q" class="qa">
-                        <div id="num" class="num">Q</div>
+                        <div id="num" class="num">Q1</div>
                         <div class="QTitle" class="QTitle">QTitle1</div>
                     </li>
-                    <li id="A">
-                        <div>A1</div>
-                        <div>A2</div>
+                    <li id="A" class="qa_a">
+                        <div class="qa_an">A1</div>
+                    </li>
+                    <li id="A" class="qa_a">
+                        <div class="qa_an">A2</div>
                     </li>
                 </ul>
                 <ul id="Q2" class="qagroup">
@@ -214,9 +216,11 @@ return JSON.stringify(obj);
                         <div id="num" class="num">Q2</div>
                         <div class="QTitle" class="QTitle">QTitle2</div>
                     </li>
-                    <li id="A">
-                        <div>A1</div>
-                        <div>A2</div>
+                    <li id="A" class="qa_a">
+                        <div class="qa_an">A1</div>
+                    </li>
+                    <li id="A" class="qa_a">
+                        <div class="qa_an">A2</div>
                     </li>
                 </ul>
         
@@ -225,9 +229,11 @@ return JSON.stringify(obj);
                         <div id="num" class="num">Q3</div>
                         <div class="QTitle" class="QTitle">QTitle3</div>
                     </li>
-                    <li id="A">
-                        <div>A1</div>
-                        <div>A2</div>
+                    <li id="A" class="qa_a">
+                        <div class="qa_an">A1</div>
+                    </li>
+                    <li id="A" class="qa_a">
+                        <div class="qa_an">A2</div>
                     </li>
                 </ul>
             </div>
@@ -336,40 +342,78 @@ function insertAfter(newElement, targetElement){
 
 }
 
-function myOrder(myList,m,mO,mT,mD){
+function myOrder(myList,m,mO,mT,mD,mE){
 //myList为ul的id值，m为0显示文字，m为1显示图片，mO、mT为文字或图片内容
     var pCon=document.getElementById(myList);
-    var pSon=document.getElementsByClassName("qa")
-    
-    //var pSon=pCon.getElementsByTagName("ul").getElementsByTagName("li");
+    var qaGroup=document.getElementsByClassName("qagroup");
+    var pSon=document.getElementsByClassName("qa");
+    var pSonz=document.getElementsByClassName("qa_a");
+    for (i=0;i<pSonz.length;i++){
+         var conTempz=document.createElement("div");
+        conTempz.setAttribute("class","control");
+        var clickAdd=document.createElement("a");
+        var clickDel=document.createElement("a");
+        if (m==0){
+            var addCon=document.createTextNode("mE");
+            var delCon=document.createTextNode("mD");
+        }else{
+            var addCon=document.createElement("img");
+            var delCon=document.createElement("img");
+            addCon.setAttribute("src",mE);
+            delCon.setAttribute("src",mD);
+        }
+        clickAdd.appendChild(addCon)
+        clickAdd.setAttribute("href","#");
+        clickDel.appendChild(delCon)
+        clickDel.setAttribute("href","#");
+
+        pSonz[i].appendChild(conTempz);
+        conTempz.appendChild(clickAdd);
+        conTempz.appendChild(clickDel);
+        clickAdd.onclick=function(){
+           // alert(this.parentNode.parentNode.parentNode.id)
+            //moveSonU(this.parentNode.parentNode.parentNode,myList);
+        }
+        clickDel.onclick=function(){
+             this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)
+            //alert(this.parentNode.parentNode.className+"==="+this.parentNode.parentNode.parentNode.className);
+        }
+    }
     for(i=0;i<pSon.length;i++){
         var conTemp=document.createElement("div");
         conTemp.setAttribute("class","control");
+
         var clickUp=document.createElement("a");
         var clickDown=document.createElement("a");
         var clickDel=document.createElement("a");
+
         if(m==0){
-        var upCon=document.createTextNode(mO);
-        var downCon=document.createTextNode(mT);
-        var delCon=document.createTextNode(mD)
+            var upCon=document.createTextNode(mO);
+            var downCon=document.createTextNode(mT);
+            var delCon=document.createTextNode(mD)
         }else{
-        var upCon=document.createElement("img");
-        var downCon=document.createElement("img");
-        var delCon=document.createElement("img");
-        upCon.setAttribute("src",mO);
-        downCon.setAttribute("src",mT);
-        delCon.setAttribute("src",mD);
+            var upCon=document.createElement("img");
+            var downCon=document.createElement("img");
+            var delCon=document.createElement("img");
+            upCon.setAttribute("src",mO);
+            downCon.setAttribute("src",mT);
+            delCon.setAttribute("src",mD);
         }
+
         clickUp.appendChild(upCon);
         clickUp.setAttribute("href","#");
         clickDown.appendChild(downCon);
         clickDown.setAttribute("href","#");
         clickDel.appendChild(delCon);
         clickDel.setAttribute("href","#");
+
+        //alert(i+"===="+pSon[i].id)
         pSon[i].appendChild(conTemp);
+
         conTemp.appendChild(clickUp);
         conTemp.appendChild(clickDown);
         conTemp.appendChild(clickDel);
+
         clickUp.onclick=function(){
            // alert(this.parentNode.parentNode.parentNode.id)
             moveSonU(this.parentNode.parentNode.parentNode,myList);
@@ -378,16 +422,25 @@ function myOrder(myList,m,mO,mT,mD){
             moveSonD(this.parentNode.parentNode.parentNode);
         }
         clickDel.onclick=function(){
+
+           // alert(this.parentNode.parentNode.parentNode.className+"==="+myList);
             delSon(this.parentNode.parentNode.parentNode,myList);
         }
     }
+    for(i=0;i<qaGroup.length;i++){
+    qaGroup[i].onmouseover=function(){
+       var s=document.getElementById(this.id)
+       s.getElementsByClassName("control").display="block"
+       alert(s)
+        }
+    }
 }
-myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg");
+myOrder("listQA",1,"images/i1.png","images/i2.png","images/i4.png","images/i5.png");
 </script>
-<script type="text/javascript" src="js/jquery.js"></script> 
-<script type="text/javascript" src="js/jquery.ui.js"></script> 
-<script type="text/javascript" src="js/moment.min.js"></script> 
-<script type="text/javascript" src="js/hotel/hotel.search.js"></script> 
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.ui.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/hotel/hotel.search.js"></script>
 <script type="text/javascript" src="js/stay.js"></script>
 <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"> </div>
 </body>
