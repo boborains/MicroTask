@@ -94,7 +94,7 @@ function createTemp(num){
     for(i=0;i< document.getElementsByClassName("control").length;i++){
     document.getElementsByClassName("control")[i].getElementsByTagName("img")[0].style.display="none"
     document.getElementsByClassName("control")[i].getElementsByTagName("img")[1].style.display="none"
-    document.getElementsByClassName("QTitle")[i].innerHTML=titleArray[i]
+    document.getElementsByClassName("QTitle")[i].getElementsByTagName("input")[0].value=titleArray[i]
     }
     break;
     case 3:
@@ -107,16 +107,14 @@ function createTemp(num){
     for(i=0;i< document.getElementsByClassName("control").length;i++){
     document.getElementsByClassName("control")[i].getElementsByTagName("img")[0].style.display="none"
     document.getElementsByClassName("control")[i].getElementsByTagName("img")[1].style.display="none"
-    document.getElementsByClassName("QTitle")[i].innerHTML=titleArray[i]
+    document.getElementsByClassName("QTitle")[i].getElementsByTagName("input")[0].value=titleArray[i]
     }
     break;
     }
 }
 //保存设计
 function savetaskdesgin(){
-    //type: "POST",
-    //url: "http://back.antzb.com/web/personaltask/audit.do",
-    //dataType:"json",
+
     var obj=document.getElementsByClassName("qagroup");
 
     var qacount=obj.length;
@@ -125,39 +123,57 @@ function savetaskdesgin(){
     var types;
     var value="";
     for(i=0;i<qacount;i++){
-        //alert(obj[i].getElementsByClassName("QTitle")[0].getElementsByTagName("input")[0].value);
         var label=obj[i].getElementsByClassName("QTitle")[0].getElementsByTagName("input")[0].value;
         var index=i+1;
         if (obj[i].type==1){
             types="radio"
-            //var valuemc=obj[i].getElementsByClassName("aa")
-            //for(j=0;j<valuemc.length;j++){
-               // value=value+valuemc[j].getElementsByClassName("leftul")[0].getElementsByTagName("input")[1].value
-            //}
+            var valuemc=obj[i].getElementsByClassName("leftul")
+            value=""
+            for(j=0;j<valuemc.length;j++){
+               value=value+valuemc[j].getElementsByTagName("input")[1].value+","
+            }
         }else if(obj[i].type==2){
             types="checkbox"
+            value=""
+            var valuemc=obj[i].getElementsByClassName("leftul")
+            for(k=0;k<valuemc.length;k++){
+               value=value+valuemc[k].getElementsByTagName("input")[1].value+","
+            }
         }else if(obj[i].type==3){
             types="text"
+            value=label
         }else if(obj[i].type==4){
             types="img"
+            value=label
         }else if(obj[i].type==5){
             types="geometry"
+            value=label
         }
-        qaarea[i]="{'index':'"+index+"','label':'"+label+"','name':'"+index+"','question':'"+label+"','type':'"+types+"','value':'"+value+"'}"
+        //qaarea[i]="{'index':"+index+",'label':'"+label+"','name':'"+index+"','question':'"+label+"','type':'"+types+"','value':['"+value+"']}"
+        qaarea[i]={'index':index,'label':label,'name':index,'question':label,'type':types,'value':[value]}
         //qaarea[i]={"index":index,"label":label,"name":index,"question":label,"type":types,"value":value},
     }
-    var dataJson= "{'taskTitle':'"+taskTitle+"','taskTemplate',{'content':['"+qaarea+"']},'taskCount':'"+taskCount+"','taskFee':'"+taskFee+"','deadLine':'"+deadLine+"','priceType':'"+priceType+"','availableTime':'"+availableTime+"','taskType':'"+taskType+"','taskDesc':'"+taskDesc+"','limit':'"+limit+"','sampleUrl':'"+sampleUrl+"'}"
-    //alert(dataJson)
+
+    //var dataJson= "{'taskTitle':'"+taskTitle+"','taskTemplate':{'content':["+qaarea+"]},'taskCount':"+taskCount+",'taskFee':"+taskFee+",'deadLine':'"+deadLine+"','priceType':"+priceType+",'availableTime':'"+availableTime+"','taskType':"+taskType+",'taskDesc':'"+taskDesc+"','limit':"+limit+",'sampleUrl':'"+sampleUrl+"'}"
+//alert(qaarea)
+    var dataJson={taskTitle:taskTitle,taskTemplate:{'content':qaarea},taskCount:taskCount,taskFee:taskFee,deadLine:deadLine,priceType:2,availableTime:availableTime,taskType:taskType,taskDesc:taskDesc,limit:limit,sampleUrl:sampleUrl}
+
+        //alert(dataJson)
     $.ajax({
         type: "POST",
         url: "http://back.antzb.com/web/tasktemplate/add.do",
         dataType:"json",
-        data: {dataJson},
+        contentType: "application/json",
+        data:JSON.stringify(dataJson),
+        //data: JSON.stringify({'taskTitle':taskTitle,'taskTemplate':{'content':[qaarea]},'taskCount':taskCount,'taskFee':taskFee,'deadLine':deadLine,'priceType':2,'availableTime':availableTime,'taskType':taskType,'taskDesc':taskDesc,'limit':limit,'sampleUrl':sampleUrl}),
         success: function(message) {
-        //alert(message.code)
+        alert(JSON.stringify(dataJson))
             switch (message.code){
             case 200:
-                showtips("success")
+                showtips("任务保存成功！")
+                window.location.href='list.html';
+                //creatTaskStep1()
+
             break;
             case 400:
                 showtips("参数不正确")
@@ -174,11 +190,26 @@ function savetaskdesgin(){
             }
         },
         error: function (message) {
-            showtips("提交数据失败！")
-        }
+         //alert(message)
+             showtips("提交数据失败！"+message)
+
+             //alert(dataJson);
+         }
+
     });
 
 
+}
+//成功后返回添加步骤
+
+function creatTaskStep1(){
+
+    var obj=document.getElementById("rightbody")
+    obj.removeChild(document.getElementById("step3"))
+    var step1=document.createElement("div")
+    step1.id="step1"
+    step1.innerHTML="<div class='boxs'><ul class='ulline' onclick=creatTaskStep2()><a href='#'> 免费发布任务</a></ul><ul class='ulimg'><li><img src='images/tree.jpg'></li></ul></div>";
+    obj.appendChild(step1)
 }
 //添加题目内容
 function appquestion(type){
@@ -245,7 +276,7 @@ function setTask(){
     document.getElementById("step3").style.display="none"
     var step4=document.createElement("div")
     step4.id="step4"
-    step4.innerHTML="<div id='step4' style='display:block'><div class='titlename' ><ul><li class='li1'>任务设置</li><li class='li3'> </li><li class='li2' onclick=saveSetTask()> 保存设置 </li></ul></div><div class='boxs'><ul><li class='leftli'>任务标题</li><li class='rightli'><input type='text' name='taskTitle' value="+taskTitle+" class='inputw500'></li></ul><ul><li class='leftli'>任务详情</li><li class='rightli'><textarea name='taskDesc' id='taskDesc' cols='72' rows='5'></textarea></li></ul><ul><li class='leftli'>任务总数</li><li class='rightli'><input onkeyup=intset(this) onafterpaste=intset(this) name='taskCount' value="+taskCount+" class='input200'> </li></ul><ul><li class='leftli'>任务奖金</li><li class='rightli1'><input type='text' name='taskFee' value="+taskFee+" class='inputw100'></li><li class='rightli2'><input type='radio' name='priceTyep' checked value='2' onclick=changePrice()>金币 </li><li class='rightli2'><input type='radio' name='priceTyep' value='1' onclick=changePrice()>现金 </li></ul><ul><li class='leftli'>执行类型</li><li class='rightli3'><input type='radio' name='limit' value='1' checked onclick=changelimit()>每人完成一个 </li><li class='rightli3'><input type='radio' name='limit' value='2' onclick=changelimit()>每人完成多个 </li></ul><ul><li class='leftli'>上线时间</li><li class='rightli'><input type='text' class='inputw200 hasDatepicker' readonly name='deadLine' id='startDate'></li></ul><ul><li class='leftli'>下线时间</li><li class='rightli'><input type='text' name='availableTime' id='endDate' class='inputw200 hasDatepicker'></li></ul><ul><li class='leftli'>查看样例</li>'<li class='rightli'><input type='text' name='sampleUrl' class='inputw500'></li></ul></div></div>"
+    step4.innerHTML="<div id='step4' style='display:block'><div class='titlename' ><ul><li class='li1'>任务设置</li><li class='li3'> </li><li class='li2' onclick=saveSetTask()> 保存设置 </li></ul></div><div class='boxs'><ul><li class='leftli'>任务标题</li><li class='rightli'><input type='text' name='taskTitle' value="+taskTitle+" class='inputw500'></li></ul><ul><li class='leftli'>任务详情</li><li class='rightli'><textarea name='taskDesc' id='taskDesc' cols='72' rows='5'></textarea></li></ul><ul><li class='leftli'>任务总数</li><li class='rightli'><input onkeyup=intset(this) onafterpaste=intset(this) name='taskCount' value="+taskCount+" class='input200'> </li></ul><ul><li class='leftli'>任务奖金</li><li class='rightli1'><input type='text' name='taskFee' value="+taskFee+" class='inputw100'></li><li class='rightli2'><input type='radio' name='priceTyep' checked value='2' onclick=changePrice()>金币 </li><li class='rightli2'><input type='radio' name='priceTyep' value='1' onclick=changePrice()>现金 </li></ul><ul><li class='leftli'>执行类型</li><li class='rightli3'><input type='radio' name='limit' value='1' checked onclick=changelimit()>每人完成一个 </li><li class='rightli3'><input type='radio' name='limit' value='2' onclick=changelimit()>每人完成多个 </li></ul><ul><li class='leftli'>上线时间</li><li class='rightli'><input type='text' class='inputw200 hasDatepicker'  name='deadLine' value='2016-10-12 11:20:12'></li></ul><ul><li class='leftli'>下线时间</li><li class='rightli'><input type='text' name='availableTime'  class='inputw200 hasDatepicker' value='2016-10-12 11:20:12'></li></ul><ul><li class='leftli'>查看样例</li>'<li class='rightli'><input type='text' name='sampleUrl' class='inputw500'></li></ul></div></div>"
     obj.appendChild(step4)
 }
 //只允许输入数字
