@@ -17,14 +17,23 @@ function creatTaskStep2(){
     obj.removeChild(document.getElementById("step1"))
     var step2=document.createElement("div")
     step2.id="step2"
-    step2.innerHTML="<div class='titlename'><ul><li class='li1'>新建任务</li></ul></div><div class='boxs'><ul>任务标题</ul><ul><input type='text' name='taskTitle' value='myTask'  class='inputw500'></ul><ul class='tips'>限10个字</ul><ul>选择类型</ul><ul><table width='100%'><tr><td><img src='images/img.jpg'> </td><td><img src='images/img.jpg'></td><td><img src='images/img.jpg'></td></tr><tr><td><input type='radio' name='tasktype' value='1' checked onclick=typecheck()>调研</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>搜罗</td><td><input type='radio' name='tasktype' value='3' onclick=typecheck()>监察</td></tr></table></ul><ul><li class='libtn' onclick='creatTask(1)'>新创建</li><li class='libtn' id='tempCreat' style='display:none' onclick=creatTask(2)>模板创建</li></ul></div>";
+    step2.innerHTML="<div class='titlename'><ul><li class='li1'>新建任务</li></ul></div><div class='boxs'><ul>任务标题</ul><ul><input type='text' name='taskTitle' value='myTask'  class='inputw500'></ul><ul class='tips'>限10个字</ul><ul>选择类型</ul><ul><table width='100%'><tr><td><img src='images/img.jpg'> </td><td><img src='images/img.jpg'></td><td><img src='images/img.jpg'></td><td><img src='images/img.jpg'></td></tr><tr><td><input type='radio' name='tasktype' value='1' checked onclick=typecheck()>调研</td><td><input type='radio' name='tasktype' value='5' onclick=typecheck()>搜罗</td><td><input type='radio' name='tasktype' value='4' onclick=typecheck()>户外广告</td><td><input type='radio' name='tasktype' value='3' onclick=typecheck()>超市检查</td></tr></table></ul><ul><li class='libtn' onclick='creatTask(1)'>新创建</li><li class='libtn' id='tempCreat' style='display:none' onclick=creatTask(2)>模板创建</li></ul></div>";
     obj.appendChild(step2)
 }
 //创建任务按钮事件
 function creatTask(step){
     taskTitle=document.getElementsByName("taskTitle")[0].value;
     if (step==1){
-        newTask()
+        $.ajax({
+            type: "POST",
+            url: "http://back.antzb.com/web/tasktemplate/born.do?taskTitle="+taskTitle+"&taskType="+taskType,
+            dataType:"json",
+            contentType: "application/json",
+            success: function(message) {
+                //alert("success")
+                newTask()
+            }
+        })
     }else{
         //alert("tempbtn")
         tempTask()
