@@ -7,10 +7,9 @@
     loadtasklist(pageNo,pageSize)
  }
  function loadtasklist(pageNo,pageSize){
-
-
     showlist(pageNo,pageSize);
  }
+ //显示列表
  function showlist(pageNo,pageSize){
     var listbidbox=document.createElement("div")
     listbidbox.id="listbidbox"
@@ -57,7 +56,7 @@
                    showtask(this.id,pageNo,pageSize)
                 }
                 if (data.data.result[i].taskStatus==0){
-             	    objul.innerHTML="<td class='t2'>"+data.data.result[i].taskTitle+"</td><td class='t2'>"+data.data.result[i].taskStatusDesc+"</td><td class='t2'>"+data.data.result[i].taskCount+"</td><td class='t2'>"+data.data.result[i].hasDoneCount+"</td><td class='t2'>"+data.data.result[i].hasPassCount+"</td><td class='t2'>"+data.data.result[i].unPassCount+"</td><td class='t2'><div id="+data.data.result[i].taskInd+" onclick=deltask(this,event,"+pageNo+","+pageSize+") onmouseover=changclass(this,'over') onmouseout=changclass(this,'out') >删除任务</div><div id="+data.data.result[i].taskInd+" onclick=appon(this,event,"+pageNo+","+pageSize+") onmouseover=changclass(this,'over') onmouseout=changclass(this,'out') >申请上线</div></td>"
+             	    objul.innerHTML="<td class='t2'>"+data.data.result[i].taskTitle+"</td><td class='t2'>"+data.data.result[i].taskStatusDesc+"</td><td class='t2'>"+data.data.result[i].taskCount+"</td><td class='t2'>"+data.data.result[i].hasDoneCount+"</td><td class='t2'>"+data.data.result[i].hasPassCount+"</td><td class='t2'>"+data.data.result[i].unPassCount+"</td><td class='t2'><div id="+data.data.result[i].taskInd+" onclick=deltask(this,event,"+pageNo+","+pageSize+") onmouseover=changclass(this,'over') onmouseout=changclass(this,'out') >删除任务</div><div id="+data.data.result[i].taskInd+" onclick=appon(this,event,"+pageNo+","+pageSize+") onmouseover=changclass(this,'over') onmouseout=changclass(this,'out') >申请上线</div><div id="+data.data.result[i].taskInd+" onclick=edittask(this,event) onmouseover=changclass(this,'over') onmouseout=changclass(this,'out') >编辑任务</div></td>"
 
                 }else if (data.data.result[i].taskStatus==1){
              	    objul.innerHTML="<td class='t2'>"+data.data.result[i].taskTitle+"</td><td class='t2'>"+data.data.result[i].taskStatusDesc+"</td><td class='t2'>"+data.data.result[i].taskCount+"</td><td class='t2'>"+data.data.result[i].hasDoneCount+"</td><td class='t2'>"+data.data.result[i].hasPassCount+"</td><td class='t2'>"+data.data.result[i].unPassCount+"</td><td class='t2'><div id="+data.data.result[i].taskInd+" onclick=hrefPage(this,event) onmouseover=changclass(this,'over') onmouseout=changclass(this,'out') >任务审核</div></td>"
@@ -157,6 +156,19 @@
 
     })
  }
+ //编辑任务
+ function edittask(obj,evt){
+    //alert("edittask")
+    var e=(evt)?evt:window.event;
+        if (window.event) {
+            e.cancelBubble=true;
+        } else {
+            //e.preventDefault();
+            e.stopPropagation();
+        }
+    location='publish.html?id='+obj.id
+
+ }
  function appon(obj,evt,pageNo,pageSize){
     var e=(evt)?evt:window.event;
     if (window.event) {
@@ -196,6 +208,8 @@
      }
      location='examine.html?id='+obj.id
  }
+
+ //显示任务详情
  function showtask(id,pageNo,pageSize){
     document.getElementById("listbidbox").style.display="none"
     $.ajax({
@@ -232,26 +246,31 @@
     		targetbox2.id="tasklist"
             targetbox2.className="box"
             taskobj.appendChild(targetbox2)
-            taskTemplate=data2.data.taskTemplate.content.length
+            taskTemplate=data2.data.taskTemplate.questionList.length
 
             if(taskTemplate>0){
                for(i=0;i<taskTemplate;i++){
-                  var question=data2.data.taskTemplate.content[i].question
-                  var type=data2.data.taskTemplate.content[i].type
-                  var value=data2.data.taskTemplate.content[i].value
+                  var question=data2.data.taskTemplate.questionList[i].name
+                  var type=data2.data.taskTemplate.questionList[i].content[0].type
+                  var value=data2.data.taskTemplate.questionList[i].content[0].value
                   var questionul=document.createElement("ul")
                   questionul.style="color:#000"
                   questionul.innerHTML="Q"+(i+1)+"："+question
                   targetbox2.appendChild(questionul)
                   switch(type){
-                     case "img":
-                     break;
-                     case "geometry":
-                     break;
                      case "radio":
-                     for(j=0;j<value.length;j++){
+                     var values=String(value).split(",")
+                     for(j=0;j<values.length-1;j++){
                         var questionvalue=document.createElement("ul")
-                        questionvalue.innerHTML="<input type='radio'>&nbsp;"+value[j]
+                        questionvalue.innerHTML="<input type='radio'>&nbsp;"+values[j]
+                        targetbox2.appendChild(questionvalue)
+                     }
+                     break;
+                     case "checkbox":
+                     var values=String(value).split(",")
+                     for(j=0;j<values.length-1;j++){
+                        var questionvalue=document.createElement("ul")
+                        questionvalue.innerHTML="<input type='checkbox'>&nbsp;"+values[j]
                         targetbox2.appendChild(questionvalue)
                      }
                      break;

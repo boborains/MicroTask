@@ -332,7 +332,7 @@ padding:3px;
 }
 .rightbody .boxs ul{font-size:16px;margin-bottom:20px;height:auto; display:block;overflow:auto;}
 .rightbody .boxs ul li{line-height:30px;}
-.rightbody .boxs ul .leftli{float:left;width:10%; text-align:right;padding-right:10px;font-size:14px;}
+.rightbody .boxs ul .leftli{float:left;width:8%; text-align:left;padding-right:10px;font-size:16px;}
 .rightbody .boxs ul .rightli{float:left;width:80%}
 .rightbody .boxs ul .rightli1{float:left;width:15%}
 .rightbody .boxs ul .rightli2{float:left;width:10%}
@@ -357,7 +357,7 @@ padding:3px;
 .rightbody .boxs .ulimg{border-radius:4px; background:#eee;padding:25px;}
 .rightbody .titlename {height:auto; display:block; overflow:auto}
 .rightbody .titlename li{float:left}
-.rightbody .titlename .li1{padding:15px 30px 0px;font-size:32px;color:#594931;width:55%;}
+.rightbody .titlename .li1{padding:15px 30px 0px;font-size:32px;color:#594931;width:75%;}
 .rightbody .titlename .li2{cursor: pointer;padding:10px 30px; text-align:center; color:#fff; margin:15px 15px 0px;width:10%;background:#FDAC23 none repeat scroll 0% 0%; border-radius:4px;font-size:16px;}
 .rightbody .titlename .li3{padding:10px 40px; text-align:center; color:#fff; margin:15px 15px 0px;width:10%; border-radius:4px;font-size:16px;}
 
