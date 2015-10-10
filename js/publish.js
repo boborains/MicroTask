@@ -33,6 +33,7 @@
         	var data = eval('(' + data + ')');
         	switch (data.code){
         	case 200:
+        	    taskInd=loc
                 taskTitle=data.data.taskTitle
                 taskType=data.data.taskType
                 taskDesc=data.data.taskDesc
@@ -142,11 +143,33 @@ function creatTask(step){
     availableTime=document.getElementsByName("availableTime")[0].value;
     deadLine=document.getElementsByName("deadLine")[0].value;
     sampleUrl=document.getElementsByName("sampleUrl")[0].value;
-    if (step==1){
-       newTask()
-    }else{
+    switch(step){
+    case 1:
+        newTask()
+    break;
+    case 2:
         tempTask()
+    break;
+    case 3:
+        saveEdittask()
+    break;
     }
+
+}
+//
+function saveEdittask(){
+    var dataJson={taskTemplateId:taskInd,taskTitle:taskTitle,taskDesc:taskDesc,taskCount:taskCount,price:taskFee,priceType:priceType,processLimit:processLimit, avaliableTime:availableTime,deadLine:deadLine}
+    $.ajax({
+        type: "POST",
+        url: "http://back.antzb.com/web/tasktemplate/edit.do",
+        dataType:"json",
+        contentType: "application/json",
+        data:JSON.stringify(dataJson),
+        success: function(message) {
+        alert(message.code)
+        alert(JSON.stringify(dataJson))
+        }
+    })
 }
 //新任务创建
 function newTask(){
