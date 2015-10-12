@@ -104,7 +104,7 @@ function creatTaskStep2(){
         step2.innerHTML="<div class='titlename'><ul><li class='li1'>新建任务</li></ul></div><div class='boxs'><ul>任务标题</ul><ul><input type='text' name='taskTitle' value=''  class='inputw500'></ul><ul class='tips'>限10个字</ul><ul><li class='leftli'>任务详情</li><li class='rightli'><textarea name='taskDesc' id='taskDesc' cols='72' rows='5'></textarea></li></ul><ul><li class='leftli'>任务总数</li><li class='rightli'><input onkeyup=intset(this) onafterpaste=intset(this) name='taskCount' value="+taskCount+" class='input200'> </li></ul><ul><li class='leftli'>任务奖金</li><li class='rightli1'><input type='text' name='taskFee' value="+taskFee+" class='inputw100'></li><li class='rightli2'><input type='radio' name='priceTyep' checked value='2' onclick=changePrice()>金币 </li><li class='rightli2'><input type='radio' name='priceTyep' value='1' onclick=changePrice()>现金 </li></ul><ul><li class='leftli'>执行类型</li><li class='rightli3'><input type='radio' name='limit' value='1' checked onclick=changelimit()>每人完成一个 </li><li class='rightli3'><input type='radio' name='limit' value='20' onclick=changelimit()>每人完成多个 </li></ul><ul><li class='leftli'>上线时间</li><li class='rightli'><input type='text' name='availableTime'  class='inputw200 hasDatepicker' value='"+availableTime+"'></li></ul><ul><li class='leftli'>下线时间</li><li class='rightli'><input type='text' class='inputw200 hasDatepicker'  name='deadLine' value='"+deadLine+"'></li></ul><ul><li class='leftli'>查看样例</li>'<li class='rightli'><input type='text' name='sampleUrl' class='inputw500'></li></ul><ul>选择类型</ul><ul><table width='100%'><tr><td><img src='images/img.jpg'> </td><td><img src='images/img.jpg'></td><td><img src='images/img.jpg'></td></tr><tr><td><input type='radio' name='tasktype' value='1' checked onclick=typecheck()>调研</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>搜罗</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>监察</td></tr></table></ul><ul><li class='libtn' id='creatbtn1' onclick='creatTask(1)'>新创建</li><li class='libtn' id='tempCreat' style='display:none' id='creatbtn2' onclick=creatTask(2)>模板创建</li></ul></div>";
 obj.appendChild(step2)
     }else{
-        step2.innerHTML="<div class='titlename'><ul><li class='li1'>新建任务</li></ul></div><div class='boxs'><ul>任务标题</ul><ul><input type='text' name='taskTitle' value="+taskTitle+"  class='inputw500'></ul><ul class='tips'>限10个字</ul><ul><li class='leftli'>任务详情</li><li class='rightli'><textarea name='taskDesc' id='taskDesc' cols='72' rows='5'>"+taskDesc+"</textarea></li></ul><ul><li class='leftli'>任务总数</li><li class='rightli'><input onkeyup=intset(this) onafterpaste=intset(this) name='taskCount' value="+taskCount+" class='input200'> </li></ul><ul><li class='leftli'>任务奖金</li><li class='rightli1'><input type='text' name='taskFee' value="+taskFee+" class='inputw100'></li><li class='rightli2'><input type='radio' name='priceTyep' checked value='2' onclick=changePrice()>金币 </li><li class='rightli2'><input type='radio' name='priceTyep' value='1' onclick=changePrice()>现金 </li></ul><ul><li class='leftli'>执行类型</li><li class='rightli3'><input type='radio' name='limit' value='1' checked onclick=changelimit()>每人完成一个 </li><li class='rightli3'><input type='radio' name='limit' value='20' onclick=changelimit()>每人完成多个 </li></ul><ul><li class='leftli'>上线时间</li><li class='rightli'><input type='text' name='availableTime'  class='inputw200 hasDatepicker' value='"+availableTime+"'></li></ul><ul><li class='leftli'>下线时间</li><li class='rightli'><input type='text' class='inputw200 hasDatepicker'  name='deadLine' value='"+deadLine+"'></li></ul><ul><li class='leftli'>查看样例</li>'<li class='rightli'><input type='text' name='sampleUrl' class='inputw500'value=''></li></ul><ul>选择类型</ul><ul><table width='100%'><tr><td><img src='images/img.jpg'> </td><td><img src='images/img.jpg'></td><td><img src='images/img.jpg'></td></tr><tr><td><input type='radio' name='tasktype' value='1' checked onclick=typecheck()>调研</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>搜罗</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>监察</td></tr></table></ul><ul><li class='libtn' id='editsave' onclick='creatTask(3)'>保存修改</li></ul></div>";
+        step2.innerHTML="<form method='post' id='eidttask' action='http://back.antzb.com/web/tasktemplate/edit.do'><div class='titlename'><ul><li class='li1'>新建任务</li></ul></div><div class='boxs'><ul>任务标题</ul><ul><input type='text' name='taskTitle' value="+taskTitle+"  class='inputw500'></ul><ul class='tips'>限10个字</ul><ul><li class='leftli'>任务详情</li><li class='rightli'><textarea name='taskDesc' id='taskDesc' cols='72' rows='5'>"+taskDesc+"</textarea></li></ul><ul><li class='leftli'>任务总数</li><li class='rightli'><input onkeyup=intset(this) onafterpaste=intset(this) name='taskCount' value="+taskCount+" class='input200'> </li></ul><ul><li class='leftli'>任务奖金</li><li class='rightli1'><input type='text' name='taskFee' value="+taskFee+" class='inputw100'></li><li class='rightli2'><input type='radio' name='priceTyep' checked value='2' onclick=changePrice()>金币 </li><li class='rightli2'><input type='radio' name='priceTyep' value='1' onclick=changePrice()>现金 </li></ul><ul><li class='leftli'>执行类型</li><li class='rightli3'><input type='radio' name='limit' value='1' checked onclick=changelimit()>每人完成一个 </li><li class='rightli3'><input type='radio' name='limit' value='20' onclick=changelimit()>每人完成多个 </li></ul><ul><li class='leftli'>上线时间</li><li class='rightli'><input type='text' name='availableTime'  class='inputw200 hasDatepicker' value='"+availableTime+"'></li></ul><ul><li class='leftli'>下线时间</li><li class='rightli'><input type='text' class='inputw200 hasDatepicker'  name='deadLine' value='"+deadLine+"'></li></ul><ul><li class='leftli'>查看样例</li>'<li class='rightli'><input type='text' name='sampleUrl' class='inputw500'value=''></li></ul><ul>选择类型</ul><ul><table width='100%'><tr><td><img src='images/img.jpg'> </td><td><img src='images/img.jpg'></td><td><img src='images/img.jpg'></td></tr><tr><td><input type='radio' name='tasktype' value='1' checked onclick=typecheck()>调研</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>搜罗</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>监察</td></tr></table></ul><ul><input type='button' value='保存修改' class='libtn' onclick = 'saveEdittask();' /></ul></div></form>";
         obj.appendChild(step2)
         var objs=document.getElementsByName("priceTyep")
         for(var i=0;i<objs.length;i++){
@@ -158,18 +158,17 @@ function creatTask(step){
 }
 //
 function saveEdittask(){
-    var dataJson={taskTemplateId:taskInd,taskTitle:taskTitle,taskDesc:taskDesc,taskCount:taskCount,price:taskFee,priceType:priceType,processLimit:processLimit, avaliableTime:availableTime,deadLine:deadLine}
-    $.ajax({
-        type: "POST",
-        url: "http://back.antzb.com/web/tasktemplate/edit.do",
-        dataType:"json",
-        contentType: "application/json",
-        data:JSON.stringify(dataJson),
-        success: function(message) {
-        alert(message.code)
-        alert(JSON.stringify(dataJson))
-        }
-    })
+    taskTemplateId=taskInd
+    taskTitle=document.getElementsByName("taskTitle")[0].value
+    taskDesc=document.getElementsByName("taskDesc")[0].value
+    taskCount=document.getElementsByName("taskCount")[0].value
+    price=document.getElementsByName("taskFee")[0].value
+    //priceType=priceType
+    //processLimit=limit
+    avaliableTime=document.getElementsByName("availableTime")[0].value
+    deadLine=document.getElementsByName("deadLine")[0].value
+    alert(taskTemplateId+"="+taskTitle+"="+taskDesc+"="+taskCount+"="+price+"="+priceType+"="+processLimit+"="+avaliableTime+"="+deadLine)
+    document.getElementById("eidttask").submit();
 }
 //新任务创建
 function newTask(){
@@ -216,12 +215,11 @@ function createTemp(num){
     switch (num){
     case 1:
     appquestion(4)
-    appquestion(3)
     appquestion(4)
     appquestion(4)
     appquestion(4)
     appquestion(4)
-    var titleArray=new Array("请拍下超市名称照片","请输入超市名称","请拍下端架照片","请拍下货架照片","请拍下堆头照片","请拍下包柱照片")
+    var titleArray=new Array("请拍下超市门口照片","请拍下端架照片","请拍下货架照片","请拍下堆头照片","请拍下包柱照片")
     for(i=0;i< document.getElementsByClassName("control").length;i++){
     document.getElementsByClassName("control")[i].getElementsByTagName("img")[0].style.display="none"
     document.getElementsByClassName("control")[i].getElementsByTagName("img")[1].style.display="none"
@@ -230,8 +228,7 @@ function createTemp(num){
     break;
     case 2:
     appquestion(4)
-    appquestion(3)
-    var titleArray=new Array("请拍下户外广告的全身照片","请输入广告所在地址信息")
+    var titleArray=new Array("拍下户外广告的全身照片")
     for(i=0;i< document.getElementsByClassName("control").length;i++){
     document.getElementsByClassName("control")[i].getElementsByTagName("img")[0].style.display="none"
     document.getElementsByClassName("control")[i].getElementsByTagName("img")[1].style.display="none"
