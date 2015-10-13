@@ -1,3 +1,0 @@
-function setmonth(){
-alert("test")
-}

@@ -15,6 +15,10 @@
     var pagetype//0:为修改；1:为创建
 
  window.onload=function(){
+ var new_element=document.createElement("script");
+ new_element.setAttribute("type","text/javascript");
+ new_element.setAttribute("src","js/datapicker.js");
+ document.body.appendChild(new_element);
     var url = window.location.search;
     var loc = url.substring(url.lastIndexOf('=')+1, url.length);
     if (loc==""){
@@ -101,10 +105,10 @@ function creatTaskStep2(){
 
     if (pagetype==0){
     obj.removeChild(document.getElementById("step1"))
-        step2.innerHTML="<div class='titlename'><ul><li class='li1'>新建任务</li></ul></div><div class='boxs'><ul>任务标题</ul><ul><input type='text' name='taskTitle' value=''  class='inputw500'></ul><ul class='tips'>限10个字</ul><ul><li class='leftli'>任务详情</li><li class='rightli'><textarea name='taskDesc' id='taskDesc' cols='72' rows='5'></textarea></li></ul><ul><li class='leftli'>任务总数</li><li class='rightli'><input onkeyup=intset(this) onafterpaste=intset(this) name='taskCount' value="+taskCount+" class='input200'> </li></ul><ul><li class='leftli'>任务奖金</li><li class='rightli1'><input type='text' name='taskFee' value="+taskFee+" class='inputw100'></li><li class='rightli2'><input type='radio' name='priceTyep' checked value='2' onclick=changePrice()>金币 </li><li class='rightli2'><input type='radio' name='priceTyep' value='1' onclick=changePrice()>现金 </li></ul><ul><li class='leftli'>执行类型</li><li class='rightli3'><input type='radio' name='limit' value='1' checked onclick=changelimit()>每人完成一个 </li><li class='rightli3'><input type='radio' name='limit' value='20' onclick=changelimit()>每人完成多个 </li></ul><ul><li class='leftli'>上线时间</li><li class='rightli'><input id='endtime' type='text' name='availableTime'  class='inputw200 hasDatepicker' value='' onclick='setmonth(this)' readonly='readonly'></li></ul><ul><li class='leftli'>下线时间</li><li class='rightli'><input type='text' class='inputw200 hasDatepicker'  name='deadLine' value='"+deadLine+"'></li></ul><ul><li class='leftli'>查看样例</li>'<li class='rightli'><input type='text' name='sampleUrl' class='inputw500'></li></ul><ul>选择类型</ul><ul><table width='100%'><tr><td><img src='images/img.jpg'> </td><td><img src='images/img.jpg'></td><td><img src='images/img.jpg'></td></tr><tr><td><input type='radio' name='tasktype' value='1' checked onclick=typecheck()>调研</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>搜罗</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>监察</td></tr></table></ul><ul><li class='libtn' id='creatbtn1' onclick='creatTask(1)'>新创建</li><li class='libtn' id='tempCreat' style='display:none' id='creatbtn2' onclick=creatTask(2)>模板创建</li></ul></div>";
+        step2.innerHTML="<div class='titlename'><ul><li class='li1'>新建任务</li></ul></div><div class='boxs'><ul>任务标题</ul><ul><input type='text' name='taskTitle' value=''  class='inputw500'></ul><ul class='tips'>限10个字</ul><ul><li class='leftli'>任务详情</li><li class='rightli'><textarea name='taskDesc' id='taskDesc' cols='72' rows='5'></textarea></li></ul><ul><li class='leftli'>任务总数</li><li class='rightli'><input onkeyup=intset(this) onafterpaste=intset(this) name='taskCount' value="+taskCount+" class='input200'> </li></ul><ul><li class='leftli'>任务奖金</li><li class='rightli1'><input type='text' name='taskFee' value="+taskFee+" class='inputw100'></li><li class='rightli2'><input type='radio' name='priceTyep' checked value='2' onclick=changePrice()>金币 </li><li class='rightli2'><input type='radio' name='priceTyep' value='1' onclick=changePrice()>现金 </li></ul><ul><li class='leftli'>执行类型</li><li class='rightli3'><input type='radio' name='limit' value='1' checked onclick=changelimit()>每人完成一个 </li><li class='rightli3'><input type='radio' name='limit' value='20' onclick=changelimit()>每人完成多个 </li></ul><ul><li class='leftli'>上线时间</li><li class='rightli'><input type='text' name='availableTime'  class='inputw200 hasDatepicker' value='"+availableTime+"' onfocus=setdata() readonly='readonly'></li></ul><ul><li class='leftli'>下线时间</li><li class='rightli'><input type='text' class='inputw200 hasDatepicker'  name='deadLine' value='"+deadLine+"' onfocus=setdata()></li></ul><ul><li class='leftli'>查看样例</li>'<li class='rightli'><input type='text' name='sampleUrl' class='inputw500'></li></ul><ul>选择类型</ul><ul><table width='100%'><tr><td><img src='images/img01.jpg'> </td><td><img src='images/img02.jpg'></td><td><img src='images/img03.jpg'></td></tr><tr><td><input type='radio' name='tasktype' value='1' checked onclick=typecheck()>调研</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>搜罗</td><td><input type='radio' name='tasktype' value='2' onclick=typecheck()>监察</td></tr></table></ul><ul><li class='libtn' id='creatbtn1' onclick='creatTask(1)'>新创建</li><li class='libtn' id='tempCreat' style='display:none' id='creatbtn2' onclick=creatTask(2)>模板创建</li></ul></div>";
 obj.appendChild(step2)
     }else{
-        step2.innerHTML="<form method='post' id='eidttaskform' action='http://back.antzb.com/web/tasktemplate/edit.do'><div class='titlename'><ul><li class='li1'>新建任务</li></ul></div><div class='boxs'><ul>ID</ul><ul><input type='text' name='taskTemplateId' value="+taskInd+"  class='inputw500'></ul><ul>任务标题</ul><ul><input type='text' name='taskTitle' value="+taskTitle+"  class='inputw500'></ul><ul class='tips'>限10个字</ul><ul><li class='leftli'>任务详情</li><li class='rightli'><textarea name='taskDesc' id='taskDesc' cols='72' rows='5'>"+taskDesc+"</textarea></li></ul><ul><li class='leftli'>任务总数</li><li class='rightli'><input onkeyup=intset(this) onafterpaste=intset(this) name='taskCount' value="+taskCount+" class='input200'> </li></ul><ul><li class='leftli'>任务奖金</li><li class='rightli1'><input type='text' name='taskFee' value="+taskFee+" class='inputw100'></li><li class='rightli2'><input type='radio' name='priceType' checked value='2' onclick=changePrice()>金币 </li><li class='rightli2'><input type='radio' name='priceType' value='1' onclick=changePrice()>现金 </li></ul><ul><li class='leftli'>执行类型</li><li class='rightli3'><input type='radio' name='processLimit' value='1' checked onclick=changelimit()>每人完成一个 </li><li class='rightli3'><input type='radio' name='processLimit' value='20' onclick=changelimit()>每人完成多个 </li></ul><ul><li class='leftli'>上线时间</li><li class='rightli'><input type='text' name='availableTime'  class='inputw200 hasDatepicker' value='"+availableTime+"'></li></ul><ul><li class='leftli'>下线时间</li><li class='rightli'><input type='text' class='inputw200 hasDatepicker'  name='deadLine' value='"+deadLine+"'></li></ul><ul><li class='leftli'>查看样例</li>'<li class='rightli'><input type='text' name='sampleUrl' class='inputw500'value=''></li></ul><ul>选择类型</ul><ul><table width='100%'><tr><td><img src='images/img.jpg'> </td><td><img src='images/img.jpg'></td><td><img src='images/img.jpg'></td></tr><tr><td><input type='radio' name='taskType' value='1' checked onclick=typecheck()>调研</td><td><input type='radio' name='taskType' value='2' onclick=typecheck()>搜罗</td><td><input type='radio' name='taskType' value='2' onclick=typecheck()>监察</td></tr></table></ul><ul><input type='submit'  value='保存修改' class='libtn'  /></ul></div></form>";
+        step2.innerHTML="<form method='post' id='eidttaskform' action='http://back.antzb.com/web/tasktemplate/edit.do'><div class='titlename'><ul><li class='li1'>新建任务</li></ul></div><div class='boxs'><ul style='display:none'><input type='text' name='taskTemplateId' value="+taskInd+"  class='inputw500'></ul><ul>任务标题</ul><ul><input type='text' name='taskTitle' value="+taskTitle+"  class='inputw500'></ul><ul class='tips'>限10个字</ul><ul><li class='leftli'>任务详情</li><li class='rightli'><textarea name='taskDesc' id='taskDesc' cols='72' rows='5'>"+taskDesc+"</textarea></li></ul><ul><li class='leftli'>任务总数</li><li class='rightli'><input onkeyup=intset(this) onafterpaste=intset(this) name='taskCount' value="+taskCount+" class='input200'> </li></ul><ul><li class='leftli'>任务奖金</li><li class='rightli1'><input type='text' name='taskFee' value="+taskFee+" class='inputw100'></li><li class='rightli2'><input type='radio' name='priceType' checked value='2' onclick=changePrice()>金币 </li><li class='rightli2'><input type='radio' name='priceType' value='1' onclick=changePrice()>现金 </li></ul><ul><li class='leftli'>执行类型</li><li class='rightli3'><input type='radio' name='processLimit' value='1' checked onclick=changelimit()>每人完成一个 </li><li class='rightli3'><input type='radio' name='processLimit' value='20' onclick=changelimit()>每人完成多个 </li></ul><ul><li class='leftli'>上线时间</li><li class='rightli'><input type='text' name='availableTime'  class='inputw200 hasDatepicker' value='"+availableTime+"'onfocus=setdata()></li></ul><ul><li class='leftli'>下线时间</li><li class='rightli'><input type='text' class='inputw200 hasDatepicker'  name='deadLine' value='"+deadLine+"'onfocus=setdata()></li></ul><ul><li class='leftli'>查看样例</li>'<li class='rightli'><input type='text' name='sampleUrl' class='inputw500'value=''></li></ul><ul>选择类型</ul><ul><table width='100%'><tr><td><img src='images/img01.jpg'> </td><td><img src='images/img02.jpg'></td><td><img src='images/img03.jpg'></td></tr><tr><td><input type='radio' name='taskType' value='1' checked onclick=typecheck()>调研</td><td><input type='radio' name='taskType' value='2' onclick=typecheck()>搜罗</td><td><input type='radio' name='taskType' value='2' onclick=typecheck()>监察</td></tr></table></ul><ul><input type='submit'  value='保存修改' class='libtn'  /></ul></div></form>";
         obj.appendChild(step2)
         var objs=document.getElementsByName("priceType")
         for(var i=0;i<objs.length;i++){
@@ -132,6 +136,11 @@ obj.appendChild(step2)
 
 
 }
+function setdata(){
+WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'%y-%M-%d',firstDayOfWeek:1})
+WdatePicker({skin:'whyGreen'})
+//WdatePicker({minDate:'%y-%M-%d'})
+}
 //创建任务按钮事件
 function creatTask(step){
     taskTitle=document.getElementsByName("taskTitle")[0].value;
@@ -157,7 +166,21 @@ function creatTask(step){
     }
 
 }
+//
+function saveReport(){
 
+    $("#eidttaskform").ajaxSubmit(function(message) {
+    // 对于表单提交成功后处理，message为提交页面saveReport.htm的返回内容
+    });
+
+    return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+
+}
+//
+function saveEdittask(){
+
+    document.getElementById("eidttaskform").submit();
+}
 //新任务创建
 function newTask(){
     var obj=document.getElementById("rightbody")
