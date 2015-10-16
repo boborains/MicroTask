@@ -380,7 +380,11 @@ box-shadow: inset 0 0px 0px rgba(0,0,0,.0), 0 0 8px rgba(0,0,0,.0)
 
 #listQA .qagroup .input500{border:1px solid #000;background:#fff;color:#red}
 #listQA .qagroup .qbox{border:1px solid #ccc;background:#fff;margin:4px;width:50%;height:28px;}
-#listQA .qagroup .photobox{border:1px dotted #ccc;width:30px;heigh:30px;margin:4px;text-align:center}
+#listQA .qagroup .photobox{border:1px dotted #ccc;width:30px;heigh:30px;margin:4px;text-align:center;float:left}
+#listQA .qagroup .photoleft{float:left;width:150px;;heigh:30px;margin:4px;}
+#listQA .qagroup .photoleft .li1{float:left;width:30px;border:1px dotted #ccc;text-align:center;}
+#listQA .qagroup .photoleft .li2{float:left;width:35px;text-align:center;}
+#listQA .qagroup .photoleft .li3{float:left;width:30px;border:1px dotted #ccc;text-align:center;}
 #listQA .qagroup .qa{border-bottom:0px solid #ccc;height:30px;padding-left:10px;background:#fff}
 
 #listQA .qagroup .aa{clear:both;float:none;border:1px solid #fff;overflow-y:auto;margin:0px;}

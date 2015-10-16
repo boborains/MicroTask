@@ -233,6 +233,7 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
         this.className="pagemouseout"
     }
  }
+ //任务完成详情
  function persononetask(id,pageNo,pageSize){
 
     document.getElementById("tasklistbox").style.display="none"
@@ -274,53 +275,76 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
            }else{
 var             priceTxt="金币"
            }
-    	   targetpagetitle.innerHTML="<ul class='ztitle'>任务详情</ul><ul>任务名称："+data2.data.taskTemplateDetail.taskTitle+data2.data.personalTaskDetail.pind+"</ul><ul>任务描述："+data2.data.taskTemplateDetail.taskDesc+"</ul><ul><span>任务价格："+data2.data.taskTemplateDetail.taskFee+priceTxt+"</span></ul><ul>任务内容：</ul>"
+           var taskDesc
+           var taskTitle
+           if(data2.data.taskTemplateDetail.taskDesc==undefined){
+                taskDesc=""
+           }else{
+                taskDesc=data2.data.taskTemplateDetail.taskDesc
+           }
+           if(data2.data.taskTemplateDetail.taskTitle==undefined){
+                taskTitle=""
+           }else{
+                taskTitle=data2.data.taskTemplateDetail.taskTitle
+           }
+    	   targetpagetitle.innerHTML="<ul class='ztitle'>任务详情</ul><ul>任务名称："+taskTitle+data2.data.personalTaskDetail.pind+"</ul><ul>任务描述："+taskDesc+"</ul><ul><span>任务价格："+data2.data.taskTemplateDetail.taskFee+priceTxt+"</span></ul><ul>任务内容：</ul>"
     	   taskdesc.appendChild(targetpagetitle)
     	   var personalanswer=new Array();
-    	   //var dic={};
-    	   //dic=data2.data.personalTaskDetail.taskContent;
-    	   //var keys=dic.Keys().toArray();//将obj对象的键值转换成数组
-
-    	   //alert("共"+data2.data.taskTemplateDetail.taskTemplate.content.length+"题")
-    	   for(j=0;j<data2.data.taskTemplateDetail.taskTemplate.content.length;j++){
+    	   //alert("共"+data2.data.personalTaskDetail.taskContent.questionList.length)
+    	   var nums=data2.data.personalTaskDetail.taskContent.questionList
+    	   for(j=0;j<nums.length;j++){
               var tasknr=document.createElement("ul")
-              tasknr.innerHTML="Q"+data2.data.taskTemplateDetail.taskTemplate.content[j].index+"："+data2.data.taskTemplateDetail.taskTemplate.content[j].question
-              personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index]=data2.data.personalTaskDetail.taskContent[data2.data.taskTemplateDetail.taskTemplate.content[j].index]
-
-              //var www=
-    	      //alert(data2.data.taskTemplateDetail.taskTemplate.content[j].index+"++++++++"+data2.data.personalTaskDetail.taskContent[data2.data.taskTemplateDetail.taskTemplate.content[j].index])
+              tasknr.innerHTML="Q"+(j+1)+"："+nums[j].name
               taskdesc.appendChild(tasknr)
-              switch(data2.data.taskTemplateDetail.taskTemplate.content[j].type){
+              switch(nums[j].content[0].type){
 
                  case "img":
                     var tasknr=document.createElement("ul");
-                    tasknr.innerHTML="<img src='"+personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index]+"' width='200'>";
+                    for(i=0;i<nums[j].content[0].value.length;i++){
+                        tasknr.innerHTML=tasknr.innerHTML+"<img src='"+nums[j].content[0].value[i]+"' width='200'>&nbsp&nbsp&nbsp&nbsp";
+                    }
                     taskdesc.appendChild(tasknr);
-
+                    if(nums[j].content.length>1){
+                    if (nums[j].content[1].value!=undefined){
+                        var taskmap=document.createElement("ul");
+                        taskmap.innerHTML="<div style='height:100px;border:1px solid #ccc;'>我是给地图留的位置"+nums[j].content[1].value+"</div>"
+                        taskdesc.appendChild(taskmap);
+                    }}
                  break;
 
                  case "radio":
-                 //txt1:获取问题详情
-                 var txt1=data2.data.taskTemplateDetail.taskTemplate.content
-                 for (k=0;k<txt1[j].value.length;k++){
-                    var tasknr=document.createElement("ul")
-                   //alert("用户选择了"+personalanswer[j])
-                    //alert("选项"+txt1[j].value[k])
-                    //alert(txt1[j].value[k]==personalanswer[j])
-                    if(txt1[j].value[k]==personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index]){
-                    tasknr.innerHTML="<input type='radio' name=Q"+txt1[j].index+"value='' checked='checked'>&nbsp;"+txt1[j].value[k]
-                    }else{
-                    tasknr.innerHTML="<input type='radio' name=Q"+txt1[j].index+"value=''>&nbsp;"+txt1[j].value[k]
-                    }
-                    taskdesc.appendChild(tasknr)
-                 }
-                 break;
-                 case "geometry":
-                    
                     var tasknr=document.createElement("ul");
-                    tasknr.innerHTML=personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index];
+                    for(i=0;i<nums[j].content[0].value.length;i++){
+                        tasknr.innerHTML=tasknr.innerHTML+"<input type='radio' value='"+nums[j].content[0].value[i]+"' checked>"+nums[j].content[0].value[i]+"<br/>";
+                    }
+                    taskdesc.appendChild(tasknr);
+                 break;
+                 case "checkbox":
+                    var tasknr=document.createElement("ul");
+                    for(i=0;i<nums[j].content[0].value.length;i++){
+                        tasknr.innerHTML=tasknr.innerHTML+"<input type='checkbox' value='"+nums[j].content[0].value[i]+"' checked>"+nums[j].content[0].value[i]+"<br/>";
+                    }
+                    taskdesc.appendChild(tasknr);
+                 break;
+
+                 case "video":
+
+                    var tasknr=document.createElement("ul");
+                    for(i=0;i<nums[j].content[0].value.length;i++){
+                        tasknr.innerHTML="<video width='500' height='250' controls='controls''><source src='"+nums[j].content[0].value+"' type='video/mp4'></video>&nbsp&nbsp&nbsp&nbsp"
+                    }
                     taskdesc.appendChild(tasknr);
 
+                 break;
+                 case "text":
+                 var tasknr=document.createElement("ul")
+                    tasknr.innerHTML=nums[j].content[0].value
+                    taskdesc.appendChild(tasknr)
+                 break;
+                 case "geometry":
+                 var tasknr=document.createElement("ul")
+                    tasknr.innerHTML=nums[j].content[0].value
+                    taskdesc.appendChild(tasknr)
                  break;
 
               }
@@ -357,6 +381,7 @@ var             priceTxt="金币"
     	   }
            //提交审核通过
            $("#checkOk").click(function(){
+           alert(data2.data.personalTaskDetail.pind)
                var pind=data2.data.personalTaskDetail.pind;
                var checkdesc = document.getElementById("checkdesc").value
 
@@ -392,6 +417,7 @@ var             priceTxt="金币"
             })
            //提交审核不通过
            $("#checkNo").click(function(){
+           alert(data2.data.personalTaskDetail.pind)
                var pind=data2.data.personalTaskDetail.pind;
                var checkdesc = document.getElementById("checkdesc").value
                //alert("checkNo"+pind+"==="+checkdesc)

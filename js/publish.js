@@ -8,6 +8,7 @@
     var now = new Date();
     var availableTime=CurentTime()//上线时间
     var deadLine=CurentTime()//下线时间
+    var photonum=1
 
     var sampleUrl//查看样例
     var taskInd//任务id
@@ -282,6 +283,7 @@ function savetaskdesgin(){
             for(j=0;j<valuemc.length;j++){
                value=value+valuemc[j].getElementsByTagName("input")[1].value+","
             }
+             qaareas[i]={'type':types,'value': [value]}
         }else if(obj[i].type==2){
             types="checkbox"
             value=""
@@ -289,17 +291,21 @@ function savetaskdesgin(){
             for(k=0;k<valuemc.length;k++){
                value=value+valuemc[k].getElementsByTagName("input")[1].value+","
             }
+             qaareas[i]={'type':types,'value': [value]}
         }else if(obj[i].type==3){
             types="text"
             value=label
         }else if(obj[i].type==4){
             types="img"
             value=label
+            num=obj[i].getElementsByClassName("li2")[0].innerHTML
+             qaareas[i]={'type':types,'num':num,'value': [value]}
         }else if(obj[i].type==5){
             types="geometry"
             value=label
+             qaareas[i]={'type':types,'value': [value]}
         }
-        qaareas[i]={'type':types,'value': [value]}
+
         qaarea[i]={content:[qaareas[i]],'name':label}
     }
 
@@ -372,7 +378,7 @@ function appquestion(type){
         myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","",qagroup.id);
         break;
     case 2:
-        qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='多选题'></div></li><li id='A' class='aa'><div id='1'><ul class='leftul'><input type='checkbox' name="+qagroup.id+"><input type='text' value='选项1'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,'1',"+qagroup.id+")><img src='images/i4.png' onclick=delaa(this)></ul></div></li>"
+        qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='多选题'></div></li><li id='A' class='aa'><div id='1'><ul class='leftul'><input type='checkbox' name="+qagroup.id+"><input type='text' value='选项1'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,'2',"+qagroup.id+")><img src='images/i4.png' onclick=delaa(this)></ul></div></li>"
         obj.appendChild(qagroup)
         myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","",qagroup.id);
     break;
@@ -382,7 +388,8 @@ function appquestion(type){
         myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","",qagroup.id);
     break;
     case 4:
-        qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='拍照题'></div></li><li id='A' class='aa'><div id='1'><ul class='photobox'>+</ul></div></li>"
+       photonum=1
+        qagroup.innerHTML="<li id='Q' class='qa'><div id='num' class='num'>Q"+num+"</div><div class='QTitle' class='QTitle'><input type='text' value='拍照题'></div></li><li id='A' class='aa'><div id=1><ul class='photoleft'><li class='li1' onclick=ctrlphotonum(this,0)>-</li><li class='li2' id='qphoto'>"+photonum+"</li><li class='li3' onclick=ctrlphotonum(this,1)>+</li></ul></div></li>"
         obj.appendChild(qagroup)
         myOrder("listQA",1,"images/ico3.jpg","images/ico2.jpg","images/ico4.jpg","",qagroup.id);
     break;
@@ -396,6 +403,19 @@ function appquestion(type){
 
 
 }
+//ctrlphotonum
+function ctrlphotonum(obj,n){
+var mc=obj.parentNode.parentNode.getElementsByTagName("ul")[0].getElementsByTagName("li")[1]
+    if(n==1){
+         mc.innerHTML=parseInt(mc.innerHTML)+1
+    }else{
+        if(parseInt(mc.innerHTML)>1){
+        mc.innerHTML=parseInt(mc.innerHTML)-1
+        }
+    }
+
+
+}
 //添加答案选项
 function addaa(obj,type){
     //alert(obj.parentNode.parentNode.parentNode.parentNode.id)
@@ -403,7 +423,11 @@ function addaa(obj,type){
     var num=obj.parentNode.parentNode.parentNode.getElementsByTagName("div").length+1
     var divl=document.createElement("div")
     divl.id=num
-    divl.innerHTML="<ul class='leftul'><input type='radio' name="+name+"><input type='text' value='选项"+num+"'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,'1',"+name+")><img src='images/i4.png' onclick=delaa(this)></ul>"
+    if (type==1){
+        divl.innerHTML="<ul class='leftul'><input type='radio' name="+name+"><input type='text' value='选项"+num+"'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,type,"+name+")><img src='images/i4.png' onclick=delaa(this)></ul>"
+    }else{
+        divl.innerHTML="<ul class='leftul'><input type='checkbox' name="+name+"><input type='text' value='选项"+num+"'></ul><ul class='rightul'><img src='images/i5.png' onclick=addaa(this,type,"+name+")><img src='images/i4.png' onclick=delaa(this)></ul>"
+    }
     obj.parentNode.parentNode.parentNode.appendChild(divl)
 }
 //删除答案选项

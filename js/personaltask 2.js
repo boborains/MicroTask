@@ -274,40 +274,41 @@ function setpage(pageNo,pageSize,totalCount,totalPage){
            }else{
 var             priceTxt="金币"
            }
-    	   targetpagetitle.innerHTML="<ul class='ztitle'>任务详情</ul><ul>任务名称："+data2.data.taskTemplateDetail.taskTitle+data2.data.personalTaskDetail.pind+"</ul><ul>任务描述："+data2.data.taskTemplateDetail.taskDesc+"</ul><ul><span>任务价格："+data2.data.taskTemplateDetail.taskFee+priceTxt+"</span></ul><ul>任务内容：</ul>"
+    	   targetpagetitle.innerHTML="<ul class='ztitle'>任务详情</ul><ul>任务名称："+data2.data.taskTemplateDetail.taskTitle+data2.data.personalTaskDetail.pind+"</ul><ul>任务描述："+data2.data.taskTemplateDetail.taskDesc+"</ul><ul><span>任务价格："+data2.data.taskTemplateDetail.taskFee+priceTxt+"</span></ul><ul>任务内容1：</ul>"
     	   taskdesc.appendChild(targetpagetitle)
     	   var personalanswer=new Array();
     	   //var dic={};
     	   //dic=data2.data.personalTaskDetail.taskContent;
     	   //var keys=dic.Keys().toArray();//将obj对象的键值转换成数组
 
-    	   //alert("共"+data2.data.taskTemplateDetail.taskTemplate.content.length+"题")
-    	   for(j=0;j<data2.data.taskTemplateDetail.taskTemplate.content.length;j++){
+    	   alert("共"+data2.data.taskTemplateDetail.taskTemplate.questionList.length)
+    	   for(j=0;j<data2.data.taskTemplateDetail.taskTemplate.questionList.length;j++){
               var tasknr=document.createElement("ul")
-              tasknr.innerHTML="Q"+data2.data.taskTemplateDetail.taskTemplate.content[j].index+"："+data2.data.taskTemplateDetail.taskTemplate.content[j].question
-              personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index]=data2.data.personalTaskDetail.taskContent[data2.data.taskTemplateDetail.taskTemplate.content[j].index]
+              alert(j)
+              tasknr.innerHTML="Q"+j+"："+data2.data.taskTemplateDetail.taskTemplate.questionList[j].name
+             // personalanswer[data2.data.taskTemplateDetail.taskTemplate.questionList.content[j].index]=data2.data.personalTaskDetail.taskContent[data2.data.taskTemplateDetail.taskTemplate.questionList.content[j].index]
 
               //var www=
     	      //alert(data2.data.taskTemplateDetail.taskTemplate.content[j].index+"++++++++"+data2.data.personalTaskDetail.taskContent[data2.data.taskTemplateDetail.taskTemplate.content[j].index])
               taskdesc.appendChild(tasknr)
-              switch(data2.data.taskTemplateDetail.taskTemplate.content[j].type){
+              switch(data2.data.taskTemplateDetail.taskTemplate.questionList[j].content.type){
 
                  case "img":
                     var tasknr=document.createElement("ul");
-                    tasknr.innerHTML="<img src='"+personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index]+"' width='200'>";
+                    tasknr.innerHTML="<img src='"+personalanswer[data2.data.taskTemplateDetail.taskTemplate.questionList[j].content.index]+"' width='200'>";
                     taskdesc.appendChild(tasknr);
 
                  break;
 
                  case "radio":
                  //txt1:获取问题详情
-                 var txt1=data2.data.taskTemplateDetail.taskTemplate.content
+                 var txt1=data2.data.taskTemplateDetail.taskTemplate.questionList[j].content
                  for (k=0;k<txt1[j].value.length;k++){
                     var tasknr=document.createElement("ul")
                    //alert("用户选择了"+personalanswer[j])
                     //alert("选项"+txt1[j].value[k])
                     //alert(txt1[j].value[k]==personalanswer[j])
-                    if(txt1[j].value[k]==personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index]){
+                    if(txt1[j].value[k]==personalanswer[data2.data.taskTemplateDetail.taskTemplate.questionList[j].content.index]){
                     tasknr.innerHTML="<input type='radio' name=Q"+txt1[j].index+"value='' checked='checked'>&nbsp;"+txt1[j].value[k]
                     }else{
                     tasknr.innerHTML="<input type='radio' name=Q"+txt1[j].index+"value=''>&nbsp;"+txt1[j].value[k]
@@ -316,9 +317,9 @@ var             priceTxt="金币"
                  }
                  break;
                  case "geometry":
-                    
+
                     var tasknr=document.createElement("ul");
-                    tasknr.innerHTML=personalanswer[data2.data.taskTemplateDetail.taskTemplate.content[j].index];
+                    tasknr.innerHTML=personalanswer[data2.data.taskTemplateDetail.taskTemplate.questionList[j].content.index];
                     taskdesc.appendChild(tasknr);
 
                  break;
